@@ -1,0 +1,150 @@
+<template>
+<div class="page" data-name="details">
+
+	<div class="navbar no-shadow">
+		<div class="navbar-bg"></div>
+		<div class="navbar-inner">
+			<div class="left">
+				<a class="link icon-only" onclick="router.back()">
+					<img src="img/back.png" style="height:calc(32pt / var(--ratio))">
+				</a>
+			</div>
+			<div class="title"><img src="img/logo.png" /></div>
+			<div class="right">
+				
+			</div>
+		</div>
+	</div>
+	
+	<div class="page-content">
+
+		<div class="sub-title">OUTLETS</div>
+		
+		<div class="outlet-header row">
+			<div class="col-45">
+				<img src="{{this.outlet.brand_branch_outlet_image}}" style="width:100%; display:block" />
+			</div>
+			<div class="col-55" style="align-self:center">
+				<div class="title">{{this.outlet.brand_branch_name}}</div>
+				<div class="desc">
+					{{this.outlet.brand_branch_address}}
+				</div>
+			</div>
+		</div>
+		
+		<div class="link-wrapper row no-gap text-align-center" style="width:calc(100% - 80pt / var(--ratio)); margin:calc(30pt / var(--ratio)) auto 0">
+			<div class="col">
+				<div class="label">PHONE</div>
+				<div class="value">{{this.outlet.brand_branch_phone_no}}</div>
+			</div>
+			<div class="col">
+				<div class="label">OPERATION HOURS</div>
+				<div class="value">{{this.outlet.brand_branch_operating_hours}}</div>
+			</div>
+		</div>
+		
+		<div style="border-bottom:1px solid #d7d7e2; margin:calc(25pt / var(--ratio)) 0"></div>
+		
+		<div class="link-wrapper row no-gap text-align-center" style="width:calc(100% - 80pt / var(--ratio)); margin:0 auto calc(30pt / var(--ratio))">
+			<a class="col link external" href="tel:{{this.outlet.person_contact}}" target="_system"><img class="larger" src="img/call.png" /><span>Call</span></a>
+			<a class="col link external" href="{{this.outlet.waze}}" target="_system"><img class="larger" src="img/waze.png" /><span>Waze</span></a>
+			<a class="col link external" href="{{this.outlet.gmap}}" target="_system"><img class="larger" src="img/gmap.png" /><span>Google<br>Map</span></a>
+		</div>
+		
+		<img src="{{this.outlet.brand_branch_image1}}" style="width:100%" />
+		
+	</div>
+	
+</div>
+
+
+</template>
+
+
+<style>
+
+.link-wrapper {
+	border-radius:calc(17pt / var(--ratio));
+	box-shadow:0 1px 5pt 2px rgba(0,0,0,0.15);
+	width:calc(280pt / var(--ratio));
+	margin:calc(60pt / var(--ratio)) auto calc(20pt / var(--ratio));
+	font-family:'Roboto';
+	font-weight:500;
+}
+.link-wrapper .larger {
+	height:calc(48pt / var(--ratio));
+	margin:calc(20pt / var(--ratio)) 0;
+}
+.link-wrapper>.col:nth-last-of-type(2) {
+	border:2px solid #e7e7e2;
+	border-top:none;
+	border-bottom:none;
+}
+.link-wrapper>.col:first-child {
+	border-left:none;
+}
+.link-wrapper .label {
+	font-size:calc(13pt / var(--ratio));
+	color:#3d4449;
+	text-align:left;
+	padding-top:calc(20pt / var(--ratio));
+	padding-left:calc(20pt / var(--ratio));
+	padding-right:calc(20pt / var(--ratio));
+}
+.link-wrapper .value {
+	font-size:calc(20pt / var(--ratio));
+	color:#000;
+	text-align:left;
+	padding-bottom:calc(20pt / var(--ratio));
+	padding-left:calc(20pt / var(--ratio));
+	padding-right:calc(20pt / var(--ratio));
+}
+.link-wrapper span {
+	font-size:calc(18pt / var(--ratio));
+	color:#3d4449;
+	display:inline-block;
+	padding-left:calc(15pt / var(--ratio));
+	vertical-align:middle;
+	line-height:1.2;
+	text-align:left;
+}
+
+.outlet-header {
+	background:#1d1d1b;
+	color:#fff;
+	font-family:'Roboto';
+	font-weight:500;
+	text-align:left;
+	padding:calc(30pt / var(--ratio)) calc(40pt / var(--ratio));
+}
+.outlet-header .title {
+	font-size:calc(20pt / var(--ratio));
+}
+.outlet-header .desc {
+	font-size:calc(14pt / var(--ratio));
+}
+
+</style>
+
+
+<script>
+  return {
+		data() {
+			return {
+				'outlet': details.selected_outlet
+			};
+		},
+    methods: {
+			
+			
+    },
+		on: {
+      pageInit: function () {
+			
+				
+			}
+		}
+	};
+
+</script>
+

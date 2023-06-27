@@ -1,0 +1,188 @@
+<template>
+<div class="page" data-name="redeem">
+
+	<div class="navbar no-shadow">
+		<div class="navbar-bg"></div>
+		<div class="navbar-inner">
+			<div class="left">
+				<a class="link icon-only" onclick="router.back()">
+					<img src="img/back.png" style="height:calc(32pt / var(--ratio))">
+				</a>
+			</div>
+			<div class="title"><img src="img/logo.png" /></div>
+			<div class="right">
+				
+			</div>
+		</div>
+	</div>
+	
+	<div class="page-content">
+		{{#with this.voucher}}
+		<div class="sub-title">VOUCHER</div>
+		
+		<div class="link-wrapper3 row">
+			<div class="col">
+				<div class="label">REDEEM</div>
+				<div class="value larger">{{this.brand_vouchers_points}}<span style="font-size:calc(24pt / var(--ratio))">pts</span></div>
+			</div>
+		</div>
+		
+		<div class="text-align-center" style="font-size:calc(18pt / var(--ratio)); color:#000; padding:0 calc(50pt / var(--ratio)); margin-top:calc(40pt / var(--ratio))">
+		You're going to spend {{this.brand_vouchers_points}} points to redeem<br>RM {{this.brand_vouchers_value}} cash voucher. 
+		</div>
+		<div class="text-align-center" style="font-size:calc(14pt / var(--ratio)); color:#000; margin-top:calc(30pt / var(--ratio)); padding:0 calc(50pt / var(--ratio)); font-weight:500">
+		Please present the voucher code below to the branch manager let them press the redeem button.
+		</div>
+		
+		<div style="border-top:calc(2pt / var(--ratio)) solid #D7D7E2; margin:calc(30pt / var(--ratio)) 0"></div>
+		
+		<div class="text-align-center" style="font-size:calc(16pt / var(--ratio)); color:#000; font-weight:500; letter-spacing:calc(2pt / var(--ratio))">
+		VOUCHER CODE
+		</div>
+		
+		<div class="code-area row">
+			<div class="col">
+				<div class="code"><div class="text"></div></div>
+			</div>
+			<div class="col">
+				<div class="code"><div class="text"></div></div>
+			</div>
+			<div class="col">
+				<div class="code"><div class="text"></div></div>
+			</div>
+			<div class="col">
+				<div class="code"><div class="text"></div></div>
+			</div>
+			<div class="col">
+				<div class="code"><div class="text"></div></div>
+			</div>
+			<div class="col">
+				<div class="code"><div class="text"></div></div>
+			</div>
+		</div>
+		
+		
+		<div class="block" style="padding:0 calc(40pt / var(--ratio))">
+			<button class="button button-fill custom-btn" @click="redeemVoucher('{{this.brand_vouchers_id}}')">REDEEM</button>
+		</div>
+		{{/with}}
+	</div>
+	
+</div>
+</template>
+
+<style>
+
+.link-wrapper3 {
+	background:#000;
+	font-family:'Roboto';
+	font-weight:500;
+}
+.link-wrapper3 .label {
+	font-size:calc(16pt / var(--ratio));
+	color:#fff;
+	text-align:center;
+	padding-top:calc(20pt / var(--ratio));
+	padding-left:calc(20pt / var(--ratio));
+	padding-right:calc(20pt / var(--ratio));
+	letter-spacing:calc(2pt / var(--ratio));
+}
+.link-wrapper3 .value.larger {
+	font-size:calc(80pt / var(--ratio));
+	font-weight:500;
+	color:#fff;
+	text-align:center;
+	padding-bottom:calc(20pt / var(--ratio));
+	padding-left:calc(20pt / var(--ratio));
+	padding-right:calc(20pt / var(--ratio));
+	line-height:1;
+}
+
+.code-area {
+	margin-top:calc(30pt / var(--ratio));
+	padding:0 calc(40pt / var(--ratio));
+}
+.code {
+	width:100%;
+	padding-top:100%;
+	position:relative;
+	box-shadow:0 0 0 calc(2pt / var(--ratio)) #3D4449;
+}
+.code>.text {
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	text-align:center;
+	line-height:100%;
+	font-family:'Roboto';
+	font-weight:500;
+	font-size:calc(60pt / var(--ratio));
+}
+
+
+</style>
+
+<script>
+
+	return {
+		data() {
+			redeem = this;
+			app.preloader.show();
+			return redeem.getDetails();
+		},
+    methods: {
+			
+			getDetails: function(callback) {
+				var promises = [
+					redeem.getVoucher()
+				];
+				return Promise.allSettled(promises).then((results) => {
+					var combine = {};
+					results.forEach(function(result) { 
+						combine = {...combine, ...result.value} 
+					});
+					//app.ptr.done('#list-tab');
+					return combine;
+				});
+			},
+			
+			getVoucher: function() {
+				return new Promise((resolve) => {
+					actions.get_voucher_details(voucher.selected_voucher_id, function(json) {
+						var data = json.data;
+						resolve({ 'voucher': data });
+					});
+				});
+			},
+			
+			redeemVoucher: function(id) {
+			
+				app.dialog.confirm('Are you sure to redeem this voucher?', 'Confirmation', function() {
+					app.preloader.show();
+					var params = {
+						'data': {'brand_vouchers_id': id}
+					};
+					actions.redeem_voucher(params, function(json) {
+						app.dialog.alert(json.message, 'Success');
+						$('.code>.text').each(function(i) {
+							$(this).text(json.data.customer_voucher_code.charAt(i));
+						});
+						
+					}, function(json) {
+						app.dialog.alert(json.message, 'Failed');
+					});
+				});
+			}
+			
+    },
+		on: {
+      pageInit: function () {
+			
+				
+			}
+		}
+	};
+
+</script>

@@ -1,0 +1,197 @@
+<template>
+<div class="page" data-name="main">
+
+	<div class="navbar no-shadow" id="main-navbar">
+		<div class="navbar-bg"></div>
+		<div class="navbar-inner">
+			<div class="left ">
+
+			</div>
+			<div class="title"><img src="img/logo.png" /></div>
+			<div class="right">
+				
+			</div>
+		</div>
+	</div>
+	
+	<div id="main-tabbar" class="toolbar tabbar tabbar-labels toolbar-bottom no-shadow">
+		<div class="toolbar-inner">
+			<a href="./" class="tab-link ripple-color-black tab-link-active" data-route-tab-id="home-tab">
+				<span class="link no-ripple"><div class="holder"><img src="img/home.png" style="height:calc(35pt / var(--ratio))"></div><span>HOME</span></span>
+			</a>
+			<a href="./brand/" class="tab-link ripple-color-black" data-route-tab-id="brand-tab">
+				<span class="link no-ripple"><div class="holder"><img src="img/brand.png" style="height:calc(35pt / var(--ratio))"></div><span>BRANDS</span></span>
+			</a>
+			<a href="./scan/" class="tab-link ripple-color-black" data-route-tab-id="scan-tab">
+				<span class="link no-ripple"><div class="holder"><img src="img/scan.png" style="height:calc(35pt / var(--ratio))"></div><span>SCAN</span></span>
+			</a>
+			<a href="./user/" class="tab-link ripple-color-black" data-route-tab-id="user-tab">
+				<span class="link no-ripple"><div class="holder"><img src="img/user.png" style="height:calc(35pt / var(--ratio))"></div><span>ME</span></span>
+			</a>
+			<span class="tab-link-highlight" style="width: 33.3333%; transform: translate3d(100%, 0px, 0px);"></span>
+		</div>
+	</div>
+	
+	
+	<div class="tabs tabs-routable">
+	
+		<div class="tab page-content tab-active" id="home-tab"></div>
+		<div class="tab page-content" id="brand-tab"></div>
+    <div class="tab page-content" id="scan-tab"></div>
+    <div class="tab page-content" id="user-tab"></div>
+		
+	</div>
+		
+	
+</div>
+</template>
+
+<style>
+
+.list-toolbar {
+	z-index:499!important;
+}
+#main-tabbar {
+	--f7-toolbar-height:calc(105pt / var(--ratio));
+	background-color:#fff;
+	box-shadow:0 1px 5pt 2px rgba(0,0,0,0.15);
+	border-top-left-radius:calc(27pt / var(--ratio));
+	border-top-right-radius:calc(27pt / var(--ratio));
+}
+#main-tabbar .toolbar-inner {
+	padding:0 calc(30pt / var(--ratio));
+}
+#main-tabbar .tab-link-highlight {
+	display:none;
+}
+#main-tabbar .tab-link {
+	font-family:'Roboto';
+	font-size:calc(13pt / var(--ratio));
+	color:#fff!important;
+}
+#main-tabbar .holder {
+	width:calc(71pt / var(--ratio));
+	height:calc(71pt / var(--ratio));
+	line-height:calc(71pt / var(--ratio));
+	border-radius:calc(27pt / var(--ratio));
+	display:flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+#main-tabbar .link>span {
+	color:#dadada;
+	display:inline-block;
+	text-transform:initial!important;
+	transform:translateY(calc(0pt - 4pt / var(--ratio)));
+}
+#main-tabbar .tab-link-active .link>span {
+	color:#000;
+}
+#main-tabbar .tab-link-active[data-route-tab-id="home-tab"] img {
+	content:url("img/home-a.png");
+}
+#main-tabbar .tab-link-active[data-route-tab-id="brand-tab"] img {
+	content:url("img/brand-a.png");
+}
+#main-tabbar .tab-link-active[data-route-tab-id="scan-tab"] img {
+	content:url("img/scan-a.png");
+}
+#main-tabbar .tab-link-active[data-route-tab-id="user-tab"] img {
+	content:url("img/user-a.png");
+}
+.tab.page-content {
+	background-color:#fff;
+	padding-bottom:calc(calc(105pt / var(--ratio)) + var(--f7-safe-area-bottom) + var(--f7-page-content-extra-padding-bottom,0px));
+}
+.holder.alert:after {
+	content:attr(data-count);
+	display:block;
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin-top:calc(0pt - 20pt /var(--ratio));
+	margin-left:calc(20pt /var(--ratio));
+	transform:translate3d(-50%, -50%, 0);
+	border-radius:50%;
+	width:calc(23.4pt / var(--ratio));
+	height:calc(23.4pt / var(--ratio));
+	background:rgb(233,28,36);
+	text-align:center;
+	line-height:calc(23.4pt / var(--ratio));
+	font-family:'LatoB';
+	font-size:calc(14.3pt / var(--ratio));
+}
+
+.event-subnavbar .row,
+.notification-subnavbar .row {
+	width:100%;
+	height:100%;
+}
+.event-subnavbar .tab-link,
+.notification-subnavbar .tab-link {
+	color:var(--f7-theme-color2);
+	font-family:'LatoB';
+	font-size:calc(18.2pt / var(--ratio));
+	background:transparent;
+	text-align:left;
+	padding-left:calc(30pt / var(--ratio));
+	height:100%;
+	justify-content:flex-start;
+}
+.event-subnavbar .tab-link.tab-link-active,
+.notification-subnavbar .tab-link.tab-link-active {
+	background:#fff;
+	box-shadow:0 1px 5pt 2px rgba(0,0,0,0.15);
+}
+
+
+.sub-title {
+	background:#fff;
+	font-family:'Roboto';
+	font-weight:500;
+	font-size:calc(38pt / var(--ratio));
+	padding:0 calc(40pt / var(--ratio)) calc(15pt / var(--ratio));
+}
+
+</style>
+
+<script>
+
+  return {
+    data() {
+		
+		},
+    methods: {
+			
+			
+    },
+    on: {
+      pageInit: function () {
+				
+      },
+			pageAfterIn: function () {
+				$('#main-navbar .navbar-inner').append('<div class="subnavbar no-shadow event-subnavbar" style="background:transparent; display:none">'+
+					'<div class="subnavbar-inner no-padding" style="overflow:visible">'+
+						'<div class="row no-gap">'+
+							'<a class="col tab-link tab-link-active" href="#upcoming">Upcoming</a>'+
+							'<a class="col tab-link" href="#history2">History</a>'+
+						'</div>'+
+					'</div>'+
+				'</div>');
+				$('#main-navbar .navbar-inner').append('<div class="subnavbar no-shadow notification-subnavbar" style="background:transparent; display:none">'+
+					'<div class="subnavbar-inner no-padding">'+
+						'<div class="row no-gap">'+
+							'<a class="col tab-link tab-link-active" href="#new">New</a>'+
+							'<a class="col tab-link" href="#earlier">Earlier</a>'+
+						'</div>'+
+					'</div>'+
+				'</div>');
+      },
+      pageAfterOut: function () {
+			
+      },
+    }
+	};
+
+</script>

@@ -1,0 +1,79 @@
+<template>
+	<div class="page no-navbar" style="--f7-navbar-height:calc(60px / var(--ratio))">
+		<div class="navbar" style="transform:translateY(10px)">
+			<div class="navbar-inner sliding">
+				<div class="left">
+					<a href="#" class="link back" style="padding-left:calc(60px / var(--ratio))"><img src="img/back.png" /></a>
+				</div>
+				<div class="title"></div>
+			</div>
+		</div>
+		<div class="page-content no-padding">
+			<div data-pagination='{"el": ".swiper-pagination", "type": "progressbar"}' class="swiper-container swiper-init verify-container">
+				<div class="swiper-pagination"></div>
+				
+				<div class="divider"></div>
+				<div class="divider"></div>
+				<div class="divider"></div>
+				
+				<div class="swiper-wrapper">
+					<div class="swiper-slide">
+						<div class="post-screen">
+							<div class="post-title">Fill In Your<br>Identity Card</div>
+							<form id="verify-form" @submit="proceedForm">
+								<div class="margin-top padding-top"></div>
+								<div class="list no-hairlines-md margin-top">
+									<ul>
+										<li class="item-content item-input">
+											<div class="item-inner">
+												<div class="item-input-wrap">
+													<input id="identity-id" type="tel" placeholder="Example: 910000108888" style="font-size:calc(28px / var(--ratio))" required validate>
+													<span class="input-clear-button"></span>
+												</div>
+											</div>
+										</li>
+										<li>
+											<p style="margin-top:calc(0px / var(--ratio))">
+												<a class="sp-link" href="#">Format eg: no dash</a>
+											</p>
+										</li>
+									</ul>
+								</div>
+								
+								<div class="block no-margin" style="padding:0 calc(75px / var(--ratio)); position:absolute; bottom:calc(204px + var(--f7-safe-area-bottom) / var(--ratio)); left:0; width:100%">
+									<p class="row">
+										<button class="col button button-fill custom-btn gradient-bg">Next</button>
+									</p>
+								</div>
+								
+							</form>
+						</div>
+					</div>
+					<div class="swiper-slide">Slide 2</div>
+					<div class="swiper-slide">Slide 3</div>
+					<div class="swiper-slide">Slide 4</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+
+<script>
+  return {
+    data() {
+			
+		},
+    methods: {
+      proceedForm: function(e) {
+				e.preventDefault();
+				$('.verify-container')[0].swiper.slideNext();
+      },
+    },
+		on: {
+			pageInit: function() {
+				$('.verify-container .swiper-slide').css('min-height', $(window).height()+'px');
+			}
+		}
+	};
+
+</script>

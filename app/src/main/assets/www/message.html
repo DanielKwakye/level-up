@@ -1,0 +1,126 @@
+<template>
+<div class="page" data-name="message">
+
+	<div class="navbar no-shadow">
+		<div class="navbar-bg"></div>
+		<div class="navbar-inner">
+			<div class="left">
+				<a class="link icon-only" onclick="router.back()">
+					<img src="img/back.png" style="height:calc(32pt / var(--ratio))">
+				</a>
+			</div>
+			<div class="title"><img src="img/logo.png" /></div>
+			<div class="right">
+				
+			</div>
+		</div>
+	</div>
+	
+	<div class="page-content">
+		<div class="sub-title">INBOX</div>
+		
+		<div class="msg-container">
+		{{#with this.message}}
+			
+			<div class="msg-sub">{{this.inbox_subtitle}}</div>
+			<div class="msg-main">{{this.inbox_name}}</div>
+			<div class="msg-date">{{this.inbox_date}}</div>
+			
+			<img src="{{this.inbox_pic}}" style="width:100%" >
+			
+			<div class="msg-desc">{{this.inbox_desc}}</div>
+			
+			{{#js_if 'this.inbox_link_name.length > 0'}}
+			<div class="text-align-center">
+				<a href="{{this.inbox_link}}" {{#js_if 'this.inbox_outside==1'}}class="msg-btn button custom-btn external" target="_system"{{else}}
+				class="msg-btn button custom-btn"{{/js_if}}>{{this.inbox_link_name}}</a>
+			</div>
+			{{/js_if}}
+			
+		{{/with}}
+		</div>
+		
+	</div>
+	
+</div>
+</template>
+
+<style>
+
+.msg-container {
+	font-family:'Roboto';
+	font-weight:500;
+	padding:calc(30pt / var(--ratio)) calc(40pt / var(--ratio)) 0;
+}
+.msg-sub {
+	font-size:calc(22pt / var(--ratio));
+	transform:skewX(-5deg);
+	margin-bottom:calc(10pt / var(--ratio));
+}
+.msg-main {
+	font-size:calc(34pt / var(--ratio));
+	line-height:1.2;
+}
+.msg-date {
+	font-size:calc(22pt / var(--ratio));
+	color:#DADADA;
+}
+.msg-desc {
+	font-size:calc(16pt / var(--ratio));
+	transform:skewX(-5deg);
+	text-align:center;
+	padding:calc(15pt / var(--ratio)) 0 calc(30pt / var(--ratio));
+}
+.msg-btn {
+	margin:0 auto calc(20pt / var(--ratio));
+	width:auto;
+	min-width:calc(200pt / var(--ratio));
+	background:#000;
+	display:inline-block;
+}
+</style>
+
+<script>
+  return {
+    data() {
+			message = this;
+			return message.getDetails();
+		},
+		
+		methods: {
+		
+			getDetails: function(callback) {
+				var promises = [
+					message.getMessage()
+				];
+				return Promise.allSettled(promises).then((results) => {
+					var combine = {};
+					results.forEach(function(result) { 
+						combine = {...combine, ...result.value} 
+					});
+					if (callback) callback(combine);
+					return combine;
+				});
+			},
+			
+			getMessage: function() {
+				
+				return new Promise((resolve) => {
+					actions.get_message(inbox.selected_id, function(json) {
+						var data = json.data;
+						resolve({ 'message': data });
+					});
+				});
+				
+			},
+			
+			refresh: function() {
+			
+				message.getDetails(function(data) {
+					message.$setState({'message': data});
+				});
+			}
+			
+		}
+	};
+</script>

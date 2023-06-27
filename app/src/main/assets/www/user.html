@@ -1,0 +1,368 @@
+<template>
+<div>
+	<div class="sub-title">ME</div>
+	
+	<div class="row" style="margin:calc(20pt / var(--ratio)) calc(50pt / var(--ratio)) 0">
+		<!--div class="col-40">
+			<div class="profile-pic" style="background-image:url('{{this.profile.customer_image}}')"></div>
+			<div class="profile-name">{{this.profile.customer_firstname}} {{this.profile.customer_lastname}}</div>
+		</div>
+		<div class="col-60" style="height:calc(40vw - 18pt / var(--ratio))">
+			<div class="row no-gap" style="height:100%">
+				<div class="bar col active"></div>
+				<div class="bar col active"></div>
+				<div class="bar col active"></div>
+				<div class="bar col active"></div>
+				<div class="bar col active"></div>
+				<div class="bar col"></div>
+				<div class="bar col"></div>
+				<div class="bar col"></div>
+				<div class="bar col"></div>
+				<div class="bar col"></div>
+			</div>
+		</div-->
+		<div class="col text-align-center">
+			<div class="tier">{{this.profile.level_name}}</div>
+			<div class="profile-name">{{this.profile.customer_firstname}} {{this.profile.customer_lastname}}</div>
+			<div class="gauge pts-gauge" @click="viewProfile()">
+				<img class="picture" src="{{this.profile.customer_image}}" />
+				<img class="tier-img" src="img/tier{{js 'parseInt(this.profile.customer_level)+1'}}.png" />
+			</div>
+		</div>
+	</div>
+	
+	<div class="link-wrapper4 row no-gap text-align-center" style="width:calc(100% - 100pt / var(--ratio)); margin:calc(10pt / var(--ratio)) auto calc(30pt / var(--ratio))">
+		<div class="col">
+			<div class="value larger">{{this.profile.customer_accumulated_loyalty_points}}</div>
+			<div class="label">OF {{this.profile.threshold}} PTS</div>
+		</div>
+	</div>
+	
+	<div class="row" style="width:calc(100% - 100pt / var(--ratio)); margin:calc(30pt / var(--ratio)) auto">
+		<div class="col">
+			<div class="progressbar" data-progress="{{this.profile.progress}}" style="background-color:#DADADA; height:calc(40pt / var(--ratio))">
+				<span style="background-color:#21C400"></span>
+			</div>
+		</div>
+	</div>
+	
+	<div class="list inset no-hairlines me-list margin-vertical-half">
+		<ul>
+			<li>
+				<a href="/reward/" class="item-link">
+					<div class="item-content">
+						<div class="item-inner">
+							<div class="item-title-row">
+								<div class="item-title">MY REWARDS</div>
+							</div>
+						</div>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="/vlist/" class="item-link">
+					<div class="item-content">
+						<div class="item-inner">
+							<div class="item-title-row">
+								<div class="item-title">MY VOUCHER</div>
+							</div>
+						</div>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="/inbox/" class="item-link">
+					<div class="item-content">
+						<div class="item-inner">
+							<div class="item-title-row">
+								<div class="item-title">INBOX</div>
+							</div>
+						</div>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="#" class="item-link" @click="viewProfile()">
+					<div class="item-content">
+						<div class="item-inner">
+							<div class="item-title-row">
+								<div class="item-title">PROFILE</div>
+							</div>
+						</div>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="/refer/" class="item-link">
+					<div class="item-content">
+						<div class="item-inner">
+							<div class="item-title-row">
+								<div class="item-title">REFER A FRIEND</div>
+							</div>
+						</div>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="/contact/" class="item-link">
+					<div class="item-content">
+						<div class="item-inner">
+							<div class="item-title-row">
+								<div class="item-title">CONTACT US</div>
+							</div>
+						</div>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="https://www.leveluphub.my/terms-conditions" target="_system" class="item-link external">
+					<div class="item-content">
+						<div class="item-inner">
+							<div class="item-title-row">
+								<div class="item-title">FAQ</div>
+							</div>
+						</div>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="https://www.leveluphub.my/terms-conditions" target="_system" class="item-link external">
+					<div class="item-content">
+						<div class="item-inner">
+							<div class="item-title-row">
+								<div class="item-title">TNC</div>
+							</div>
+						</div>
+					</div>
+				</a>
+			</li>
+		</ul>
+	</div>
+	
+	<div class="margin-bottom" style="font-family:'Roboto'; font-size:calc(17pt / var(--ratio)); font-weight:500; color:#000; text-align:center">Member since {{this.profile.customer_date_added}}</div>
+	
+</div>
+</template>
+
+<style>
+.me-list {
+	--f7-list-item-min-height: calc(60pt / var(--ratio));
+}
+.me-list .item-inner {
+	padding-top:0;
+	padding-bottom:0;
+}
+.me-list .item-inner:before {
+	content:''!important;
+	background-image:url(img/right.png);
+	background-size:contain;
+	background-repeat:no-repeat;
+	background-position:center;
+	width:calc(18pt / var(--ratio))!important;
+	height:calc(22pt / var(--ratio))!important;
+}
+.me-list .item-inner:after {
+	height:calc(2pt / var(--ratio));
+	background-color:#3d4449;
+	transform:none;
+}
+
+.profile-pic {
+	border-radius:50%;
+	width:100%;
+	height:100%;
+	box-shadow:0 0 0 calc(6pt / var(--ratio)) #000;
+	padding-top:100%;
+	background-size:cover;
+	background-repeat:no-repeat;
+	background-position:center;
+}
+.profile-name {
+	font-family:'Roboto'; 
+	font-size:calc(26pt / var(--ratio));
+	font-weight:500;
+	color:#000;
+	margin-bottom:calc(10pt / var(--ratio));
+	text-align:center;
+}
+.tier {
+	font-family:'Roboto'; 
+	font-size:calc(26pt / var(--ratio));
+	font-weight:700;
+	color:#000;
+	margin-top:calc(10pt / var(--ratio));
+	text-align:center;
+	line-height:1;
+}
+.bar {
+	background:#DADADA;
+	border-right:calc(4pt / var(--ratio)) solid #fff;
+	align-self:flex-end;
+	position:relative;
+}
+.bar.active {
+	background:#000;
+}
+.bar:nth-child(1) {
+	height:calc(10pt / var(--ratio));
+}
+.bar:nth-child(2) {
+	height:calc(20pt / var(--ratio));
+}
+.bar:nth-child(3) {
+	height:calc(30pt / var(--ratio));
+}
+.bar:nth-child(4) {
+	height:calc(40pt / var(--ratio));
+}
+.bar:nth-child(5) {
+	height:calc(50pt / var(--ratio));
+}
+.bar:nth-child(6) {
+	height:calc(60pt / var(--ratio));
+}
+.bar:nth-child(7) {
+	height:calc(70pt / var(--ratio));
+}
+.bar:nth-child(8) {
+	height:calc(80pt / var(--ratio));
+}
+.bar:nth-child(9) {
+	height:calc(90pt / var(--ratio));
+}
+.bar:nth-child(10) {
+	height:calc(100pt / var(--ratio));
+}
+.bar:nth-child(10):before {
+	content:'';
+	position:absolute;
+	width: 0;
+	height: 0;
+	top:0;
+	left:calc(-2.5vw + 2pt / var(--ratio));
+	border-left: calc(5vw - 4pt / var(--ratio)) solid transparent;
+	border-right: calc(5vw - 4pt / var(--ratio)) solid transparent;
+	border-bottom: calc(9vw - 8pt / var(--ratio)) solid #DADADA;
+	transform:translateY(-100%);
+}
+.bar:nth-child(10).active:before {
+	border-bottom-color:#000;
+}
+.bar:nth-child(10):after {
+	content:'';
+	width:12vw;
+	height:calc(12vw * 1.55);
+	background-size:contain;
+	background-repeat:no-repeat;
+	background-position:center;
+	background-image:url('img/star.png');
+	position:absolute;
+	top:calc(0px - 120pt / var(--ratio));
+	left:-4vw;
+}
+.bar:nth-child(10).active:after {
+	filter:brightness(0);
+}
+
+.link-wrapper4 {
+	border-radius:calc(17pt / var(--ratio));
+	box-shadow:0 1px 5pt 2px rgba(0,0,0,0.15);
+	width:calc(280pt / var(--ratio));
+	margin:calc(60pt / var(--ratio)) auto calc(20pt / var(--ratio));
+	font-family:'Roboto';
+	font-weight:500;
+}
+.link-wrapper4 .label {
+	font-size:calc(16pt / var(--ratio));
+	color:#3d4449;
+	text-align:center;
+	padding-bottom:calc(20pt / var(--ratio));
+	padding-left:calc(20pt / var(--ratio));
+	padding-right:calc(20pt / var(--ratio));
+	letter-spacing:calc(2pt / var(--ratio));
+}
+.link-wrapper4 .value.larger {
+	font-size:calc(80pt / var(--ratio));
+	font-weight:500;
+	color:#000;
+	text-align:center;
+	padding-top:calc(20pt / var(--ratio));
+	padding-left:calc(20pt / var(--ratio));
+	padding-right:calc(20pt / var(--ratio));
+	line-height:1;
+}
+.pts-gauge > .picture {
+	position:absolute;
+	width:140px;
+	height:140px;
+	top:20px;
+	left:20px;
+	border-radius:50%;
+	z-index:-1;
+	object-fit:cover;
+	object-position:center;
+}
+.pts-gauge > .tier-img {
+	position:absolute;
+	width:calc(100pt / var(--ratio));
+	bottom:calc(10pt / var(--ratio));
+	left:calc(100% - 20px);
+}
+</style>
+
+<script>
+
+	return {
+		data() {
+			user = this;
+			return user.getDetails();
+		},
+		methods: {
+		
+			getDetails: function(callback) {
+				var promises = [
+					user.getProfile()
+				];
+				return Promise.allSettled(promises).then((results) => {
+					var combine = {};
+					results.forEach(function(result) { 
+						combine = {...combine, ...result.value} 
+					});
+					if (callback) callback(combine);
+					return combine;
+				});
+			},
+			
+			getProfile: function() {
+				
+				return new Promise((resolve) => {
+					actions.get_profile(function(json) {
+						var data = json.data;
+						resolve({ 'profile': data });
+					});
+				});
+				
+			},
+			
+			viewProfile: function() {
+				router.navigate('/profile/');
+			}
+		
+		},
+		on: {
+      tabInit: function () {
+				
+				var ptsGauge = app.gauge.create({
+					el: '.pts-gauge',
+					type: 'circle',
+					value: parseFloat(this.profile.progress) / 100,
+					size: 180,
+					borderColor: '#21C400',
+					borderWidth: 20,
+					borderBgColor: '#DADADA'
+				});
+			}
+		}
+	};
+
+</script>

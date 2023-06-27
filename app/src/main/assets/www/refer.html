@@ -1,0 +1,174 @@
+<template>
+<div class="page" data-name="refer">
+
+	<div class="navbar no-shadow">
+		<div class="navbar-bg"></div>
+		<div class="navbar-inner">
+			<div class="left">
+				<a class="link icon-only" onclick="router.back()">
+					<img src="img/back.png" style="height:calc(32pt / var(--ratio))">
+				</a>
+			</div>
+			<div class="title"><img src="img/logo.png" /></div>
+			<div class="right">
+				
+			</div>
+		</div>
+	</div>
+	
+	<div class="page-content">
+		<div class="sub-title">REFER A FRIEND</div>
+	
+		<div class="text-align-center"><img class="refer-img" src="img/refer.png" /></div>
+		
+		<div class="refer-title">REFER A FRIEND AND GET <b>100</b> POINTS</div>
+		<div class="refer-desc">
+			Share your referral code with a friend and both of you will get 100 points
+			to use towards redeeming exclusive vouchers.
+		</div>
+		
+		<div class="row no-gap refer-section">
+			<div class="col-66">
+				<div class="refer-code">{{this.referral.own_referral}}</div>
+			</div>
+			<div class="col-33">
+				<a class="button custom-btn" style="background:#000" @click="copy">COPY</a>
+			</div>
+		</div>
+		
+		<div class="section-title">SHARE</div>
+		<div class="row no-gap share-section">
+			<div class="col text-align-center">
+				<a class="share-link link" @click="share" style="background:#000">SHARE</a>
+			</div>
+			<div class="col text-align-center">
+				<a class="share-link link" @click="copyLink('{{this.referral.share_link}}')"><img src="img/icon-link.png" /></a>
+			</div>
+		</div>
+		
+		<div style="height:1px; background:#ccc; width:80%; margin:calc(30pt / var(--ratio)) auto"></div>
+		
+		<div class="section-title">YOUR REFERRALS</div>
+		<div class="row no-gap refer-section text-align-center">
+			<div class="col" style="font-family:'Roboto';	font-size:calc(26pt / var(--ratio)); align-self:center">
+				Registered
+			</div>
+			<div class="col" style="font-family:'Roboto';	font-size:calc(34pt / var(--ratio))">
+				<b>{{this.referral.number_of_referrals}}</b>
+			</div>
+		</div>
+	</div>
+	
+</div>
+</template>
+
+<style>
+.refer-img {
+	margin-top:calc(40pt / var(--ratio));
+	max-width:60%;
+}
+.refer-desc {
+	font-family:'Roboto';
+	font-size:calc(20pt / var(--ratio));
+	font-weight:400;
+	color:#000;
+	text-align:center;
+	padding:calc(30pt / var(--ratio)) calc(50pt / var(--ratio)) calc(20pt / var(--ratio));
+	max-width:calc(440pt / var(--ratio));
+	margin:0 auto;
+}
+.refer-title {
+	font-family:'Roboto';
+	font-size:calc(26pt / var(--ratio));
+	font-weight:500;
+	color:#000;
+	text-align:center;
+	margin-top:calc(20pt / var(--ratio));
+}
+.refer-section {
+	width:calc(380pt / var(--ratio));
+	margin:calc(20pt / var(--ratio)) auto calc(30pt / var(--ratio));
+}
+.share-section {
+	width:calc(380pt / var(--ratio));
+	margin:0 auto;
+}
+.refer-code {
+	border:1px solid #000;
+	text-align:center;
+	font-family:'Roboto';
+	font-size:calc(26pt / var(--ratio));
+	font-weight:500;
+	line-height:calc(65pt / var(--ratio) - 2px);
+}
+.section-title {
+	text-align:center;
+	font-family:'Roboto';
+	font-size:calc(24pt / var(--ratio));
+	font-weight:600;
+}
+.share-link {
+	width:calc(100pt / var(--ratio));
+	height:calc(100pt / var(--ratio));
+	line-height:calc(100pt / var(--ratio));
+	border-radius:50%;
+	text-align:center;
+	font-family:'Roboto';
+	font-size:calc(22pt / var(--ratio));
+	font-weight:500;
+	color:#fff;
+	margin:calc(10pt / var(--ratio)) auto 0;
+}
+.share-link>img {
+	width:100%;
+}
+</style>
+
+<script>
+  return {
+    data() {	
+			app.preloader.show();
+			return new Promise((resolve) => {
+				actions.get_referrals(function(json) {
+					var data = json.data;
+					resolve({ 'referral': data });
+				});
+			});
+		},
+		
+		methods: {
+		
+			copy: function() {
+				cordova.plugins.clipboard.copy($('.refer-code').text());
+				toast('Refer code copied.');
+			},
+			
+			copyLink: function(link) {
+				cordova.plugins.clipboard.copy(link);
+				toast('Link copied.');
+			},
+			
+			share: function() {
+			
+				var me = this;
+			
+				var options = {
+					message: me.referral.share_message + me.referral.share_link,
+					subject: '',
+					url: '',
+					chooserTitle: 'Share to',
+				};
+
+				var onSuccess = function(result) {
+					if (result.app) toast('Shared to '+result.app);
+				};
+				var onError = function(msg) {
+					toast("Sharing failed with message: " + msg);
+					console.log(msg);
+				};
+				window.plugins.socialsharing.shareWithOptions(options, onSuccess, onError);
+			}
+			
+		}
+	};
+</script>

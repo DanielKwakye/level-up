@@ -1,0 +1,158 @@
+<template>
+
+	<div>
+		<div class="sub-title">FEATURES</div>
+		{{#each banners}}
+		<a {{#js_if 'this.front_banner_outside==1'}}class="cbanner external" target="_system"{{else}}class="cbanner"{{/js_if}} 
+		{{#if front_banner_url}}href="{{this.front_banner_url}}"{{/if}}><img src="{{this.front_banner_image1}}" /></a>
+		{{/each}}
+		
+		<div class="list inset no-hairlines home-list margin-vertical-half">
+			<ul>
+				<li>
+					<a href="/privilege/" class="item-link">
+						<div class="item-content">
+							<div class="item-inner">
+								<div class="item-title-row">
+									<div class="item-title">LEVEL UP HUB PRIVILEGE</div>
+								</div>
+							</div>
+						</div>
+					</a>
+				</li>
+				<li>
+					<a href="/benefit/" class="item-link">
+						<div class="item-content">
+							<div class="item-inner">
+								<div class="item-title-row">
+									<div class="item-title">MEMBERS’ BENEFITS</div>
+								</div>
+							</div>
+						</div>
+					</a>
+				</li>
+				<li>
+				<a href="/about/" class="item-link">
+					<div class="item-content">
+						<div class="item-inner">
+							<div class="item-title-row">
+								<div class="item-title">ABOUT US</div>
+							</div>
+						</div>
+					</div>
+				</a>
+			</li>
+				<li>
+					<a href="/how/" class="item-link">
+						<div class="item-content">
+							<div class="item-inner">
+								<div class="item-title-row">
+									<div class="item-title">HOW IT WORKS</div>
+								</div>
+							</div>
+						</div>
+					</a>
+				</li>
+				<li>
+					<a href="https://www.leveluphub.my/privacy-policy" target="_system" class="item-link external">
+						<div class="item-content">
+							<div class="item-inner">
+								<div class="item-title-row">
+									<div class="item-title">PRIVACY POLICY</div>
+								</div>
+							</div>
+						</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+		
+	</div>
+	
+</template>
+
+<style>
+
+.cbanner {
+	margin-bottom:calc(10pt / var(--ratio));
+}
+.cbanner>img {
+	width:100%;
+}
+.item-title {
+	color:#000;
+	font-family:'Roboto';
+	font-weight:500;
+	font-size:calc(20pt / var(--ratio));
+}
+.home-list {
+	--f7-list-item-min-height: calc(60pt / var(--ratio));
+}
+.home-list .item-inner {
+	padding-top:0;
+	padding-bottom:0;
+}
+.home-list .item-inner:before {
+	content:''!important;
+	background-image:url(img/right.png);
+	background-size:contain;
+	background-repeat:no-repeat;
+	background-position:center;
+	width:calc(18pt / var(--ratio))!important;
+	height:calc(22pt / var(--ratio))!important;
+}
+.home-list .item-inner:after {
+	height:calc(2pt / var(--ratio));
+	background-color:#3d4449;
+	transform:none;
+}
+
+</style>
+
+<script>
+
+  return {
+		
+    data() {
+			home = this;
+			app.preloader.show();
+			return home.getDetails();
+		},
+    methods: {
+			
+			getDetails: function(callback) {
+				var promises = [
+					home.getBanners()
+				];
+				return Promise.allSettled(promises).then((results) => {
+					var combine = {};
+					results.forEach(function(result) { 
+						combine = {...combine, ...result.value} 
+					});
+					//app.ptr.done('#list-tab');
+					return combine;
+				});
+			},
+			
+			getBanners: function() {
+				return new Promise((resolve) => {
+					actions.get_banner_all(function(json) {
+						var data = json.data;
+						resolve({ 'banners': data });
+					});
+				});
+			}
+			
+    },
+    on: {
+      pageInit: function () {
+			
+				
+      },
+      pageAfterOut: function () {
+			
+      },
+    }
+  }
+
+</script>

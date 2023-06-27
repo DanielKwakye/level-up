@@ -1,0 +1,73 @@
+<template>
+<div style="position:relative; height:100%">
+
+	<div class="sub-title white-bg">SCAN</div>
+	<!--div class="scan-area">
+		<div class="scan-box"></div>
+	</div-->
+	<div class="text-align-center" style="padding:calc(30pt / var(--ratio)) 0; /*bottom:calc(-15pt / var(--ratio));*/ top:50%; transform:translateY(-50%); position:absolute; width:100%; background:#fff" onclick="/*router.navigate('/barcode/')*/">
+		<img id="my-code" style="width:calc(300pt / var(--ratio))" />
+		<div style="font-family:'Roboto'; font-size:calc(30pt / var(--ratio))">{{this.code}}</div>
+		<div class="margin-top-half" style="font-family:'Roboto'; font-size:calc(15pt / var(--ratio))">MY CODE</div>
+	</div>
+	
+</div>
+</template>
+
+
+<style>
+.scan-area {
+	position:relative;
+	height:calc(100% - 180px);
+	background:transparent;
+}
+.scan-box {
+	position:relative;
+	top:50%;
+	width:60%;
+	padding-top:60%;
+	left:20%;
+	box-shadow:0 0 0 calc(10pt / var(--ratio)) #fff;
+	transform:translateY(-50%);
+}
+.scan-box:before {
+	content:'Scan Barcode or QR Code';
+	position:absolute;
+	top:calc(0px - 50pt / var(--ratio));
+	width:100%;
+	left:0;
+	text-align:center;
+	font-family:'Roboto';
+	font-weight:500;
+	font-size:calc(20pt / var(--ratio));
+	color:#fff;
+}
+</style>
+
+
+<script>
+  return {
+		data() {
+			scan = this;
+			return {code:user_data.session.customer_barcode};
+		},
+    methods: {
+		
+			
+			
+    },
+		on: {
+      tabInit: function () {
+				
+				JsBarcode("#my-code", user_data.session.customer_barcode, {
+					lineColor: "#000",
+					height:60,
+					displayValue: false
+				});
+				
+			}
+		}
+	};
+
+</script>
+

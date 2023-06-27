@@ -1,0 +1,356 @@
+<template>
+<div class="page" data-name="request">
+
+	<div class="navbar no-shadow">
+		<div class="navbar-bg"></div>
+		<div class="navbar-inner">
+			<div class="left">
+				<a class="link icon-only" @click="customBack">
+					<img src="img/back.png" style="height:calc(16.4pt / var(--ratio))">
+				</a>
+			</div>
+			<div class="title">Stock Request</div>
+			<div class="right">
+				<a class="link icon-only">
+					
+				</a>
+			</div>
+		</div>
+	</div>
+	
+	<div class="tabs-animated-wrap">
+		<div class="tabs request-tabs">
+	
+			<div id="sr1" class="page-content tab tab-active" style="background-color:#F3F6F9">
+				<div class="list media-list chevron-center no-margin request-list">
+					<ul>
+						<li>
+							<a class="item-content item-link" @click="viewDetails(1)">
+								<div class="item-inner">
+									<div class="item-title-row">
+										<div class="item-title">SRF: #98</div>
+									</div>
+									<div class="item-text">
+									Created Date: 18/3/2020<br>
+									Arriving Date: 19/3/2020
+									</div>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a class="item-content item-link">
+								<div class="item-inner">
+									<div class="item-title-row">
+										<div class="item-title">SRF: #97</div>
+									</div>
+									<div class="item-text">
+									Created Date: 18/3/2020<br>
+									Arriving Date: 19/3/2020
+									</div>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div id="sr2" class="page-content tab" style="background-color:#F3F6F9">
+				<table class="header-table" style="width:100%" cellspacing="0" cellpadding="0">
+					<tr>
+						<td class="title">Stock Request No: #97</td>
+					</tr>
+					<tr>
+						<td>Request Date: Aeon Kepong</td>
+					</tr>
+					<tr>
+						<td>Request Time: Aeon One Utama</td>
+					</tr>
+					<tr>
+						<td>Destination: 30/5/2020</td>
+					</tr>
+				</table>
+				
+				<div class="block-title margin-top no-margin-bottom">Stock Details</div>
+				<form class="search-form">
+					<div class="list no-hairlines-md no-margin">
+						<ul>
+							<li class="item-content item-input">
+								<div class="item-inner">
+									<div class="item-title-row" style="width:100%">
+										<div class="item-input-wrap">
+											<input id="list-search" type="search" placeholder="Brand Search..." />
+											<span class="input-clear-button"></span>
+										</div>
+										<div class="item-after">
+											<button class="button button-fill button-small" style="border-radius:0">Search</button>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</form>
+				
+				<div class="list media-list chevron-center inner-list margin-top">
+					<ul>
+						<li>
+							<a class="item-content item-link" @click="checkDetails()">
+								<div class="item-inner">
+									<div class="item-title-row">
+										<div class="item-title">AD7389-N</div>
+									</div>
+									<div class="item-text">
+									Alan Delon Full Cotton 3in1 Pack<br>
+									Price: RM50.00<br>
+									Qty: 80
+									</div>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a class="item-content item-link">
+								<div class="item-inner">
+									<div class="item-title-row">
+										<div class="item-title">AD7389-N</div>
+									</div>
+									<div class="item-text">
+									Alan Delon Full Cotton 3in1 Pack<br>
+									Price: RM50.00<br>
+									Qty: 50
+									</div>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+			
+			<div id="sr3" class="page-content tab" style="background-color:#F3F6F9">
+				<table class="header-table" style="width:100%" cellspacing="0" cellpadding="0">
+					<tr>
+						<td class="title">AD7389-N</td>
+					</tr>
+					<tr>
+						<td>Alan Delon Full Cotton 3in1 Pack</td>
+					</tr>
+					<tr>
+						<td>Price: RM50.00</td>
+					</tr>
+				</table>
+				
+				<table style="width:100%; padding:0 calc(30pt / var(--ratio))" class="text-align-left margin-top check-table" cellspacing="0" cellpadding="0">
+					<thead>
+						<tr>
+							<td>Size</td>
+							<td>Exp. Qty</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>S</td>
+							<td>100</td>
+						</tr>
+						<tr>
+							<td>M</td>
+							<td>50</td>
+						</tr>
+						<tr>
+							<td>L</td>
+							<td>100</td>
+						</tr>
+					</tbody>
+				</table>
+				
+			</div>
+			
+			
+		</div>
+	</div>
+	
+</div>
+</template>
+
+<style>
+
+.request-list .item-title {
+	font-family:'LatoB';
+	font-size:calc(18.2pt / var(--ratio));
+	color:var(--f7-theme-color2);
+}
+.request-list .item-text {
+	color:var(--f7-theme-color2);
+	font-family:'Lato';
+	font-size:calc(13.65pt / var(--ratio));
+	line-height:2;
+}
+.request-list li {
+	box-shadow:0 1px 5pt 2px rgba(0,0,0,0.15);
+	margin-bottom:calc(10pt / var(--ratio));
+	background:#fff;
+}
+.request-list .item-link {
+	padding-left:calc(30pt / var(--ratio));
+}
+.request-list .item-inner {
+	padding-right:calc(30pt / var(--ratio));
+}
+.request-list .item-inner:before {
+	content:'View'!important;
+	position:absolute!important;
+	background:var(--f7-theme-color)!important;
+	color:#fff!important;
+	font-family:'LatoB'!important;
+	font-size:calc(15.6pt / var(--ratio))!important;
+	text-align:center!important;
+	align-self:center!important;
+	width:auto!important;
+	padding:calc(6pt / var(--ratio)) calc(20pt / var(--ratio))!important;
+}
+
+.header-table {
+	background:#fff;
+	padding:calc(30pt / var(--ratio)) calc(30pt / var(--ratio)) calc(20pt / var(--ratio));
+	box-shadow:0 1px 5pt 2px rgba(0,0,0,0.15);
+}
+.header-table td {
+	color:var(--f7-theme-color2);
+	font-family:'Lato';
+	font-size:calc(15.6pt / var(--ratio));
+	padding:calc(4pt / var(--ratio)) 0;
+}
+.header-table td.title {
+	font-family:'LatoB';
+	font-size:calc(18.2pt / var(--ratio));
+}
+
+.search-form .item-input-wrap:after {
+	display:none!important;
+}
+.search-form li.item-input {
+	min-height:calc(63pt / var(--ratio));
+	height:calc(63pt / var(--ratio));
+	line-height:calc(63pt / var(--ratio));
+	padding-bottom:0;
+	margin-top:calc(20pt / var(--ratio));
+	transition:height 0.25s ease-in-out;
+}
+.search-form li.item-input .item-inner {
+	padding-top:calc(5pt / var(--ratio));
+	padding-bottom:0;
+	min-height:0;
+}
+.search-form input {
+	font-family:'Lato';
+	font-size:calc(20pt / var(--ratio));
+	color:var(--f7-theme-color2);
+	background-color:#fff!important;
+	padding-left:calc(16pt / var(--ratio))!important;
+}
+.search-form ::placeholder {
+	color:var(--f7-theme-color3)!important;
+	opacity:1;
+}
+
+.block-title {
+	font-family:'LatoB'!important;
+	font-size:calc(18.2pt / var(--ratio))!important;
+	color:var(--f7-theme-color2);
+}
+
+.inner-list .item-title {
+	font-family:'LatoB';
+	font-size:calc(18.2pt / var(--ratio));
+	color:var(--f7-theme-color2);
+}
+.inner-list .item-text {
+	--f7-list-item-text-max-lines:3;
+	color:var(--f7-theme-color2);
+	font-family:'Lato';
+	font-size:calc(13.65pt / var(--ratio));
+	line-height:2;
+}
+.inner-list li {
+	margin-bottom:1px;
+	background:#fff;
+}
+.inner-list .item-link {
+	padding-left:calc(30pt / var(--ratio));
+}
+.inner-list .item-inner {
+	padding-right:calc(30pt / var(--ratio));
+}
+.inner-list .item-inner:after {
+	display:none;
+}
+.inner-list .item-inner:before {
+	content:'Check'!important;
+	position:absolute!important;
+	background:var(--f7-theme-color)!important;
+	color:#fff!important;
+	font-family:'LatoB'!important;
+	font-size:calc(15.6pt / var(--ratio))!important;
+	text-align:center!important;
+	align-self:center!important;
+	width:auto!important;
+	padding:calc(6pt / var(--ratio)) calc(20pt / var(--ratio))!important;
+}
+
+.check-table td {
+	padding:calc(8pt / var(--ratio)) calc(6pt / var(--ratio));
+	font-family:'LatoB'; 
+	font-size:calc(15.6pt / var(--ratio));
+	color:var(--f7-theme-color2);
+}
+.stepper .stepper-input-wrap input {
+	font-family:'LatoB';
+	color:var(--f7-theme-color2);
+}
+.remarks {
+	width:100%;
+	font-family:'Lato';
+	font-size:calc(20pt / var(--ratio));
+	color:var(--f7-theme-color2);
+	background-color:#fff!important;
+	padding:calc(6pt / var(--ratio)) calc(16pt / var(--ratio))!important;
+	margin-top:calc(6pt / var(--ratio));
+}
+</style>
+
+<script>
+
+	return {
+		data() {
+			return {
+			
+			};
+			
+		},
+		methods: {
+		
+			viewDetails: function(id) {
+				app.tab.show('#sr2');
+			},
+			
+			checkDetails: function(id) {
+				app.tab.show('#sr3');
+			},
+			
+			customBack: function() {
+				switch ($('.request-tabs .tab-active').attr('id')) {
+					case 'sr2': app.tab.show('#sr1'); break;
+					case 'sr3': app.tab.show('#sr2'); break;
+					default: router.back(); break;
+				}
+			},
+			
+		
+		},
+		on: {
+      pageInit: function () {
+			
+				
+			}
+		}
+	};
+
+</script>

@@ -1,0 +1,214 @@
+<template>
+<div class="page" data-name="eprofile">
+
+	<div class="navbar no-shadow">
+		<div class="navbar-bg"></div>
+		<div class="navbar-inner">
+			<div class="left">
+				<a class="link icon-only" @click="updateProfile">
+					<img src="img/back.png" style="height:calc(32pt / var(--ratio))">
+				</a>
+			</div>
+			<div class="title"><img src="img/logo.png" /></div>
+			<div class="right">
+				
+			</div>
+		</div>
+	</div>
+	
+	<div class="page-content">
+
+		<div class="sub-title">EDIT</div>
+		<div class="list inline-labels inset edit-list">
+			<ul>
+				<li class="item-content item-input">
+					<div class="item-inner">
+						<div class="item-title item-label">PICTURE</div>
+						<div class="item-input-wrap">
+							<div class="profile-pic3" data-upload="0" style="background-image:url('{{this.profile.customer_image}}')" @click="chooseImage"></div>
+						</div>
+					</div>
+				</li>
+				<!--li class="item-content item-input">
+					<div class="item-inner">
+						<div class="item-title item-label">USERNAME</div>
+						<div class="item-input-wrap">
+							<input type="text" name="name">
+							<span class="input-clear-button"></span>
+						</div>
+					</div>
+				</li-->
+				<li class="item-content item-input">
+					<div class="item-inner">
+						<div class="item-title item-label">FIRST NAME</div>
+						<div class="item-input-wrap">
+							<input type="text" name="name" value="{{this.profile.customer_firstname}}" id="efname" />
+							<span class="input-clear-button"></span>
+						</div>
+					</div>
+				</li>
+				<li class="item-content item-input">
+					<div class="item-inner">
+						<div class="item-title item-label">LAST NAME</div>
+						<div class="item-input-wrap">
+							<input type="text" name="name" value="{{this.profile.customer_lastname}}" id="elname" />
+							<span class="input-clear-button"></span>
+						</div>
+					</div>
+				</li>
+				<li class="item-content item-input">
+					<div class="item-inner">
+						<div class="item-title item-label">EMAIL</div>
+						<div class="item-input-wrap">
+							<input type="text" name="name" value="{{this.profile.customer_email}}" id="eemail" readonly />
+						</div>
+					</div>
+				</li>
+				<li class="item-content item-input">
+					<div class="item-inner">
+						<div class="item-title item-label">MOBILE</div>
+						<div class="item-input-wrap">
+							<input type="text" name="name" value="{{this.profile.customer_telephone}}" id="ephone" />
+							<span class="input-clear-button"></span>
+						</div>
+					</div>
+				</li>
+				<li class="item-content item-input">
+					<div class="item-inner sp">
+						<div class="item-title item-label" style="width:103px">PASSWORD</div>
+						<div class="item-input-wrap">
+							<input type="password" value="12345678" id="epwd" />
+						</div>
+					</div>
+					<div class="item-media" style="align-self:flex-start">
+						<a class="link" href="/epassword/"><img src="img/edit2.png" style="height:calc(25pt / var(--ratio))" /></a>
+					</div>
+				</li>
+				<li class="item-content item-input">
+					<div class="item-inner">
+						<div class="item-title item-label">D.O. BIRTH</div>
+						<div class="item-input-wrap">
+							<input type="text" value="{{this.profile.customer_dob}}" id="edob" readonly />
+						</div>
+					</div>
+				</li>
+				<!--li class="item-content item-input">
+					<div class="item-inner">
+						<div class="item-title item-label">ADDRESS</div>
+						<div class="item-input-wrap">
+							<textarea class="resizable"></textarea>
+						</div>
+					</div>
+				</li-->
+			</ul>
+		</div>
+		
+	</div>
+	
+</div>
+
+
+</template>
+
+
+<style>
+.profile-pic3 {
+	border-radius:50%;
+	width:calc(100pt / var(--ratio));
+	height:calc(100pt / var(--ratio));
+	box-shadow:0 0 0 calc(4pt / var(--ratio)) #000;
+	background-size:cover;
+	background-repeat:no-repeat;
+	background-position:center;
+	margin:calc(-65pt / var(--ratio)) 0 0;
+}
+.edit-list .item-input-wrap:after {
+	left:calc(-190pt / var(--ratio))!important;
+	width:calc(100% + 190pt / var(--ratio))!important;
+}
+.edit-list .item-label {
+	font-family:'Roboto';
+	font-weight:500;
+	font-size:calc(21pt / var(--ratio));
+	color:#000;
+}
+.edit-list input, .edit-list textarea {
+	font-family:'Roboto'!important;
+	font-size:calc(20pt / var(--ratio))!important;
+}
+.item-inner.sp .item-input-wrap:after {
+	width:calc(100% + 190pt / var(--ratio) + 40px)!important;
+}
+</style>
+
+
+<script>
+	var updatePicture = false;
+
+  return {
+		data() {
+			return {
+				'profile': profile.profile
+			};
+		},
+    methods: {
+			
+			chooseImage: function() {
+				navigator.camera.getPicture(function(imageData) {
+					$('.profile-pic3').css('background-image', "url('data:image/jpeg;base64," + imageData + "')");
+					$('.profile-pic3').attr('src', "data:image/jpeg;base64," + imageData);
+					updatePicture = true;
+				}, function() {
+				
+				},
+				{
+					quality: 50,
+					destinationType: Camera.DestinationType.DATA_URL,
+					sourceType: Camera.PictureSourceType.PHOTOLIBRARY
+				});
+			},
+			
+			updateProfile: function() {
+			
+				app.preloader.show();
+				var params = {
+					'data': {
+						'customer_firstname': $('#efname').val(),
+						'customer_lastname': $('#elname').val(),
+						'customer_email': $('#eemail').val(),
+						'customer_telephone': $('#ephone').val(),
+						'customer_dob': $('#edob').val()
+					}
+				};
+				if (updatePicture) params.data.customer_image = $('.profile-pic3').attr('src');
+				actions.update_profile(params, function(json) {
+					if (json.status == 'OK') {
+						var data = json.data;
+						toast('Profile saved.');
+						router.back('/main/user/', {force:true});
+						user.getDetails(function(update) {
+							user.$setState(update);
+						});
+					}
+					else {
+						app.dialog.alert(json.message);
+					}
+					app.preloader.hide();
+				});
+			
+			}
+			
+    },
+		on: {
+      pageInit: function () {
+			/*
+				var calendarDefault = app.calendar.create({
+					inputEl: '#edob',
+					dateFormat: 'yyyy-mm-dd'
+				});*/
+			}
+		}
+	};
+
+</script>
+

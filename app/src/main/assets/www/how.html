@@ -1,0 +1,117 @@
+<template>
+<div class="page" data-name="how">
+
+	<div class="navbar no-shadow">
+		<div class="navbar-bg"></div>
+		<div class="navbar-inner">
+			<div class="left">
+				<a class="link icon-only" onclick="router.back()">
+					<img src="img/back.png" style="height:calc(32pt / var(--ratio))">
+				</a>
+			</div>
+			<div class="title"><img src="img/logo.png" /></div>
+			<div class="right">
+				
+			</div>
+		</div>
+	</div>
+	
+	<div class="page-content">
+		<div class="sub-title">HOW IT WORKS</div>
+	
+		<div class="swiper-container how-swiper swiper-init how-swiper text-align-center" data-pagination='{"el": ".swiper-pagination"}' style="margin-top:calc(40pt / var(--ratio))">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">
+					<img src="img/how1.png" />
+					<div class="slide-title">Points Collection</div>
+					<div class="slide-desc">
+						You can now collect points from multiple websites and outlets using Level Up Hub. Visit the websites to shop, collect points and enjoy more benefits. 
+					</div>
+				</div>
+				<div class="swiper-slide">
+					<img src="img/how2.png" />
+					<div class="slide-title">Rule 1: Email Address</div>
+					<div class="slide-desc">
+						Make sure you sign in to all websites and this Level Up Hub using the same email address.<br>This allows us to reward you the points from multiple platforms. <br>
+						If you login using social media account, make sure you login using the same email account to all platforms too. 
+					</div>
+				</div>
+				<div class="swiper-slide">
+					<img src="img/how3.png" />
+					<div class="slide-title">Rule 2: Same Login</div>
+					<div class="slide-desc">
+						If you login using social media account in these websites and this Level Up Hub, make sure you login using the same email account to all platforms too. 
+					</div>
+				</div>
+				<div class="swiper-slide">
+					<img src="img/how4.png" />
+					<div class="slide-title">Shop More. Rewards More</div>
+					<div class="slide-desc">
+						Remember to shop with us, and the points will be allocated to your accounts within 24hours.<br>Now, enjoy
+					</div>
+				</div>
+			</div>
+			<div class="swiper-pagination"></div>
+		</div>
+	</div>
+	
+</div>
+</template>
+
+<style>
+.how-swiper img {
+	height:calc(350pt / var(--ratio));
+}
+.slide-title {
+	font-family:'Roboto';
+	font-size:calc(30pt / var(--ratio));
+	font-weight:500;
+	color:#000;
+	position:relative;
+	padding:calc(30pt / var(--ratio)) 0;
+	text-align:center;
+}
+.slide-desc {
+	font-family:'Roboto';
+	font-size:calc(20pt / var(--ratio));
+	font-weight:500;
+	color:#000;
+	text-align:center;
+	padding:calc(30pt / var(--ratio)) calc(30pt / var(--ratio)) calc(100pt / var(--ratio));
+	max-width:calc(440pt / var(--ratio));
+	margin:0 auto;
+}
+.slide-title:after {
+	content:'';
+	position:absolute;
+	bottom:0;
+	width:calc(50pt / var(--ratio));
+	height:calc(6pt / var(--ratio));
+	background:#000;
+	border-radius:calc(6pt / var(--ratio));
+	left:calc(50% - 25pt / var(--ratio));
+}
+.how-swiper .swiper-pagination {
+	
+}
+.how-swiper .swiper-pagination-bullet {
+	width:calc(15pt / var(--ratio));
+	height:calc(15pt / var(--ratio));
+	border:1px solid #000;
+	background:#fff;
+	margin:0 calc(30pt / var(--ratio))!important;
+}
+.how-swiper .swiper-pagination-bullet-active {
+	background:#000;
+}
+</style>
+
+<script>
+  return {
+    data() {
+			
+			
+			return {};
+		}
+	};
+</script>

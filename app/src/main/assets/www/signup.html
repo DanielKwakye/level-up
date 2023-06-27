@@ -1,0 +1,95 @@
+<template>
+	<div class="page no-toolbar no-navbar no-swipeback" data-name="signup">
+		<div class="page-content pre-screen">
+			<a href="#" class="back link custom-back">
+				<img src="img/back.png" />
+			</a>
+			
+			<div class="pre-title">Sign Up</div>
+			<form id="reg-form" onsubmit="register(event)">
+			
+				<div class="list no-hairlines-md margin-top">
+					<ul>
+						<li class="item-content item-input">
+							<div class="item-inner">
+								<div class="item-input-wrap">
+									<input id="reg-name" type="text" placeholder="Name" required validate>
+									<span class="input-clear-button"></span>
+								</div>
+							</div>
+						</li>
+						<li class="item-content item-input">
+							<div class="item-inner">
+								<div class="item-input-wrap">
+									<input id="reg-contact" type="tel" placeholder="Contact" required validate>
+									<span class="input-clear-button"></span>
+								</div>
+							</div>
+						</li>
+						<li class="item-content item-input">
+							<div class="item-inner">
+								<div class="item-input-wrap">
+									<input id="reg-id" type="email" placeholder="Email address" required validate>
+									<span class="input-clear-button"></span>
+								</div>
+							</div>
+						</li>
+						<li class="item-content item-input margin-top-half">
+							<div class="item-inner">
+								<div class="item-input-wrap">
+									<input id="reg-code" type="password" placeholder="Referral code" required validate>
+								</div>
+							</div>
+						</li>
+						<li>
+							<p style="margin-top:calc(0px / var(--ratio))">
+								<a class="sp-link" href="#">Skip if you don't have</a>
+							</p>
+						</li>
+					</ul>
+				</div>
+				<div class="block no-padding" style="margin:calc(80px / var(--ratio)) calc(0px - 12px / var(--ratio)) 0">
+					<p class="row">
+						<button class="col button button-fill custom-btn gradient-bg">Sign Up</button>
+						<div class="sp-link text-align-center">
+						By accessing to your account, you agree to our<br><a>Terms Conditions</a> and <a>Privacy Policy</a>
+						</div>
+					</p>
+				</div>
+				
+				
+			</form>	
+			
+		</div>
+	</div>
+</template>
+
+<script>
+
+  return {
+    data() {
+		
+		},
+    methods: {
+      login: function (e) {
+				e.preventDefault();
+				app.input.validateInputs('#login-form');
+				if ($('#login-form .item-input-invalid').length) return;
+				
+				var params = {
+					
+				};
+				
+				router.navigate('/main/', { transition: 'f7-cover' });
+      },
+    },
+    on: {
+      pageInit: function () {
+			
+      },
+      pageAfterOut: function () {
+			
+      },
+    }
+  }
+</script>

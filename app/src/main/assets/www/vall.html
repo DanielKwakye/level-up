@@ -1,0 +1,159 @@
+<template>
+<div class="page" data-name="vall">
+
+	<div class="navbar no-shadow">
+		<div class="navbar-bg"></div>
+		<div class="navbar-inner">
+			<div class="left">
+				<a class="link icon-only" onclick="router.back()">
+					<img src="img/back.png" style="height:calc(32pt / var(--ratio))">
+				</a>
+			</div>
+			<div class="title"><img src="img/logo.png" /></div>
+			<div class="right">
+				
+			</div>
+		</div>
+	</div>
+	
+	<div class="page-content">
+
+		<div class="sub-title">VOUCHER</div>
+		{{#with this.category}}
+		<div class="row" style="border-top:calc(2pt / var(--ratio)) solid #D7D7E2; padding:calc(30pt / var(--ratio)) calc(40pt / var(--ratio))">
+			<div class="col-80">
+				<div class="category-title">{{this.brand_vouchers_category_name}}</div>
+			</div>
+			<div class="col-20 text-align-right">
+			</div>
+		</div>
+
+		<div style="padding:0 10px">{{#each this.vouchers}}<!--
+			--><div class="voucher-card2" @click="proceedRedeem('{{this.brand_vouchers_id}}')">
+				<div class="graphic" style="background-image:url('{{this.brand_vouchers_image}}')"></div>
+				<div class="extra">
+					<div class="title">{{this.brand_name}}</div>
+					<div class="desc">{{this.brand_vouchers_name}}</div>
+					<div class="pts">{{this.brand_vouchers_points}} points</div>
+				</div>
+			</div><!--
+		-->{{/each}}</div>
+
+		{{/with}}
+		
+	</div>
+	
+</div>
+
+
+</template>
+
+
+<style>
+.category-title {
+	font-family:'Roboto';
+	font-size:calc(22pt / var(--ratio));
+	font-weight:500;
+	color:#000;
+}
+.more {
+	font-family:'Roboto';
+	font-size:calc(16pt / var(--ratio));
+	font-weight:500;
+	color:#000;
+	text-decoration:underline;
+}
+.voucher-card2 {
+	display:inline-block;
+	width:calc(50% - 20px);
+	margin:0 10px 20px;
+	border-radius:calc(15pt / var(--ratio));
+	font-family:'Lato';
+	color:#fff;
+	overflow:hidden;
+	box-shadow:2px 2px 5pt 0 rgba(0,0,0,0.15);
+}
+.voucher-card2 .graphic {
+	background-size:cover;
+	background-position:center;
+	background-repeat:no-repeat;
+	padding-top:63%;
+}
+.voucher-card2 .extra {
+	background:#fff;
+	height:calc(90pt / var(--ratio));
+	padding:calc(10pt / var(--ratio)) calc(20pt / var(--ratio));
+	color:#000;
+}
+.voucher-card2 .extra .title {
+	font-family:'Roboto';
+	font-weight:500;
+	font-size:calc(14pt / var(--ratio));
+	padding-top:calc(4pt / var(--ratio));
+	line-height:1;
+}
+.voucher-card2 .extra .desc {
+	font-family:'Roboto';
+	font-weight:400;
+	font-size:calc(20pt / var(--ratio));
+	padding-top:calc(4pt / var(--ratio));
+	line-height:1;
+}
+.voucher-card2 .extra .pts {
+	font-family:'Roboto';
+	font-weight:500;
+	font-size:calc(14pt / var(--ratio));
+	margin-top:calc(30pt / var(--ratio));
+}
+</style>
+
+
+<script>
+  return {
+		data() {
+			vall = this;
+			app.preloader.show();
+			return vall.getDetails();
+		},
+    methods: {
+			
+			getDetails: function(callback) {
+				var promises = [
+					vall.getVouchers()
+				];
+				return Promise.allSettled(promises).then((results) => {
+					var combine = {};
+					results.forEach(function(result) { 
+						combine = {...combine, ...result.value} 
+					});
+					//app.ptr.done('#list-tab');
+					return combine;
+				});
+			},
+			
+			getVouchers: function() {
+				return new Promise((resolve) => {
+					actions.get_voucher_all(voucher.selected_category_id, function(json) {
+						var data = json.data;
+						resolve({ 'category': data });
+					});
+				});
+			},
+			
+			proceedRedeem: function(id) {
+			
+				voucher.selected_voucher_id = id;
+				router.navigate('/redeem/');
+			}
+			
+    },
+		on: {
+      pageInit: function () {
+			
+				
+			}
+		}
+	};
+
+</script>
+

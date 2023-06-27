@@ -1,0 +1,154 @@
+<template>
+<div class="page" data-name="list">
+
+	<div class="navbar no-shadow">
+		<div class="navbar-bg white-bg"></div>
+		<div class="navbar-inner">
+			<div class="left">
+				<a class="link icon-only back">
+					<img src="img/back.png" style="width:calc(15pt / var(--ratio))">
+				</a>
+			</div>
+			<div class="title normal-title">Filters</div>
+			<div class="right">
+				<a class="link icon-only">
+					
+				</a>
+			</div>
+		</div>
+	</div>
+	
+	<div class="page-content">
+		
+		<div class="filter-wrapper">
+			<div class="searchbar searchbar-inline">
+				<div class="searchbar-input-wrap">
+					<input type="search" placeholder="What are you looking?">
+					<i class="searchbar-icon"></i>
+					<span class="input-clear-button"></span>
+				</div>
+			</div>
+			
+			<div class="filter-title">Brand:</div>
+			<div class="filter-container">
+				<a class="link">Submit Asia</a>
+				<a class="link active">xoxoxox</a>
+				<a class="link">Master Class</a>
+				<a class="link">Success Resources</a>
+				<a class="link">ICT Training Malaysia</a>
+			</div>
+			
+			<div class="fdivider"></div>
+			
+			<div class="filter-title">Category:</div>
+			<div class="filter-container">
+				<a class="link">Cooking</a>
+				<a class="link">Marketing</a>
+				<a class="link active">Gardening</a>
+				<a class="link">Computer Science</a>
+				<a class="link active">Sport</a>
+				<a class="link">Coding</a>
+			</div>
+			
+		</div>
+		
+	</div>
+	
+</div>
+</template>
+
+<style>
+
+.filter-wrapper {
+	padding:0 calc(40pt / var(--ratio)) calc(30pt / var(--ratio));
+}
+.filter-wrapper .searchbar {
+	margin-bottom:calc(25pt / var(--ratio));
+}
+.filter-wrapper .searchbar input[type="search"] {
+	height:calc(45pt / var(--ratio));
+	line-height:calc(45pt / var(--ratio));
+	border-radius:calc(23pt / var(--ratio));
+	background:#F1F2F2;
+	color:#000;
+	font-family:'Lato';
+	font-weight:500;
+	font-size:calc(20pt / var(--ratio));
+}
+.filter-wrapper .searchbar input[type="search"] {
+	color:#808285;
+	opacity:1;
+}
+.filter-wrapper .searchbar .searchbar-icon {
+	top:calc(30pt / var(--ratio));
+	left:0;
+}
+.filter-wrapper .searchbar .searchbar-icon:after {
+	font-size:calc(20pt / var(--ratio));
+}
+.filter-title {
+	font-family:'Lato';
+	font-weight:700;
+	font-size:calc(20pt / var(--ratio));
+	line-height:calc(24pt / var(--ratio));
+	margin-bottom:calc(10pt / var(--ratio));
+	padding-left:calc(10pt / var(--ratio));
+}
+.filter-container {
+	padding-bottom:calc(5pt / var(--ratio));
+}
+.filter-container>a {
+	height:calc(45pt / var(--ratio));
+	border-radius:calc(23pt / var(--ratio));
+	display:inline-block;
+	font-family:'Lato';
+	font-weight:700;
+	font-size:calc(20pt / var(--ratio));
+	padding:0 calc(25pt / var(--ratio));
+	line-height:calc(45pt / var(--ratio));
+	margin-right:calc(8pt / var(--ratio));
+	margin-bottom:calc(12pt / var(--ratio));
+	background:rgb(241,242,242);
+	white-space:nowrap;
+	color:#000;
+}
+.filter-container>a.active {
+	color:#fff;
+	background:var(--f7-theme-color4);
+}
+
+.fdivider {
+	height:calc(2pt / var(--ratio));
+	background:rgb(230,231,232);
+	margin:calc(20pt / var(--ratio)) calc(0px - 40pt / var(--ratio)) calc(20pt / var(--ratio));
+	width:calc(100% + 80pt / var(--ratio));
+}
+
+
+</style>
+
+<script>
+
+	return {
+		data() {
+			return {
+				'type': list.type
+			};
+			
+		},
+		methods: {
+		
+			navigate: function(url) {
+				router.navigate(url);
+			}
+		
+		},
+		on: {
+      pageInit: function () {
+				
+				
+			}
+		}
+	};
+
+</script>

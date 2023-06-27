@@ -1,0 +1,175 @@
+<template>
+	<div class="page no-toolbar no-navbar no-swipeback" data-name="login">
+		<div class="page-content" style="background:#fff">
+
+			<div class="table-layout">
+				<div class="table-cell text-align-center">
+				
+					<div class="logo-wrapper" style="text-align:center; margin:calc(30pt / var(--ratio)) auto calc(60pt / var(--ratio))">
+						<img src="img/logo.png" />
+					</div>
+
+					<form id="login-form" @submit="login">
+					
+						<div class="list no-hairlines-md margin-top text-align-left">
+							<ul>
+								<li class="item-content item-input">
+									<div class="item-inner">
+										<div class="item-input-wrap">
+											<input id="login-id" type="email" placeholder="USERNAME" required validate>
+											<span class="input-clear-button"></span>
+										</div>
+									</div>
+								</li>
+								<li class="item-content item-input" style="margin-top:calc(40pt / var(--ratio))">
+									<div class="item-inner">
+										<div class="item-input-wrap">
+											<input id="login-pwd" type="password" placeholder="PASSWORD" required validate>
+										</div>
+									</div>
+									<div class="item-media">
+										<a class="link" @click="toggleInput"><img id="eye-icon" src="img/eye.png" style="height:calc(35pt / var(--ratio))" /></a>
+									</div>
+								</li>
+								<li class="text-align-right"><a href="/forgot/" style="color:var(--f7-theme-color3); font-family:'Roboto'; font-size:calc(20pt / var(--ratio))">Forgotten your password?</a></li>
+							</ul>
+						</div>
+						<p class="margin-bottom-half">
+							<label class="checkbox" style="transform:scale(0.8)"><input type="checkbox" id="remember-pwd"><i class="icon-checkbox"></i></label>
+							Remember password
+						</p>
+						<div class="block no-padding">
+							<button class="button button-fill custom-btn" style="width:calc(170pt / var(--ratio)); margin:0 auto">LOG IN</button>
+						</div>
+						<div class="text-align-center" style="margin-top:calc(80px / var(--ratio))">
+							<div style="color:var(--f7-theme-color3); font-family:'Roboto'; font-size:calc(18pt / var(--ratio))">By logging in, you agree to 
+							<a>Privacy Policy</a> and <br><a>Terms of Use</a>.</div>
+							<div class="margin-vertical-half">
+							</div>
+						</div>
+					</form>
+				
+				</div>
+			</div>
+			
+			<div style="color:var(--f7-theme-color3); font-family:'Roboto'; font-size:calc(18pt / var(--ratio)); position:absolute; bottom:calc(100pt / var(--ratio)); left:50%; transform:translateX(-50%)">Not a member? <a href="/register/" style="color:#000; text-decoration:underline">Join Us</a>.</div>
+					
+			
+		</div>
+	</div>
+</template>
+
+<style>
+
+#login-form {
+	padding:0 calc(80pt / var(--ratio));
+}
+#login-form .item-input-wrap:after {
+	display:none;
+}
+#login-form li.item-input,
+#outlet-form li {
+	border:1px solid #000;
+	min-height:calc(63pt / var(--ratio));
+	height:calc(63pt / var(--ratio));
+	line-height:calc(63pt / var(--ratio));
+	padding-bottom:0;
+	transition:height 0.25s ease-in-out;
+}
+#login-form li.item-input-invalid {
+	height:calc(90pt / var(--ratio))!important;
+}
+#login-form li.item-input .item-media {
+	align-self:center;
+	justify-content:center;
+	width:calc(60pt / var(--ratio));
+	min-width:0;
+}
+#login-form li.item-input .item-inner,
+#outlet-form .item-inner {
+	padding-top:calc(5pt / var(--ratio));
+	padding-bottom:0;
+	min-height:0;
+}
+#login-form input {
+	font-family:'Lato';
+	font-size:calc(28pt / var(--ratio));
+	color:#000;
+}
+#login-form ::placeholder {
+	color:#000!important;
+	opacity:1;
+}
+#login-form .item-input-error-message {
+	margin-top:0;
+}
+
+</style>
+
+<script>
+
+  return {
+    data() {
+		
+		},
+    methods: {
+      login: function (e) {
+				e.preventDefault();
+				
+				app.input.validateInputs('#login-form');
+				if ($('#login-form .item-input-invalid').length) return;
+				
+				app.preloader.show();
+				window.plugins.OneSignal.getIds(function(ids) {
+					localStorage.player_id = ids.userId;
+					var params = {
+						'data': {
+							'login_submit': '1',
+							'customer_email': $('#login-id').val(),
+							'customer_password': $('#login-pwd').val(),
+							'player_id' : localStorage.player_id,
+							'remember_me': true
+						}
+					};
+					actions.log_in(params, function(json) {
+						localStorage.remember_me = $('#remember-pwd').is(':checked') ? '1' : '0';
+						$('#login-form')[0].reset();
+						checkLogged(1, function(st) {
+							if (st) router.navigate('/main/');
+						});
+						//router.navigate('/main/');
+						toast(json.message);
+						
+					}, function(json) {
+						toast(json.message);
+					});
+				});
+				
+      },
+			
+			submitOutlet: function(e) {
+				e.preventDefault();
+				
+				confirmDialog.open();
+			},
+			
+			toggleInput: function() {
+			
+				var type = $('#login-pwd').attr('type');
+				$('#login-pwd').attr('type', type == 'text' ? 'password' : 'text');
+				$('#eye-icon').attr('src', type == 'text' ? 'img/eye.png' : 'img/eye-active.png');
+				$('#eye-icon').css('height', type == 'text' ? 'calc(35pt / var(--ratio))' : 'calc(30pt / var(--ratio))');
+			}
+			
+    },
+    on: {
+      pageInit: function () {
+
+				
+      },
+      pageAfterOut: function () {
+			
+      },
+    }
+  }
+</script>

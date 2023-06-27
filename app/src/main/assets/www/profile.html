@@ -1,0 +1,137 @@
+<template>
+<div class="page" data-name="profile">
+
+	<div class="navbar no-shadow">
+		<div class="navbar-bg"></div>
+		<div class="navbar-inner">
+			<div class="left">
+				<a class="link icon-only" onclick="router.back()">
+					<img src="img/back.png" style="height:calc(32pt / var(--ratio))">
+				</a>
+			</div>
+			<div class="title"><img src="img/logo.png" /></div>
+			<div class="right">
+				
+			</div>
+		</div>
+	</div>
+	
+	<div class="page-content">
+
+		<div class="sub-title">PROFILE</div>
+		<div class="profile-pic2" style="background-image:url('{{this.profile.customer_image}}')"></div>
+		<div class="profile-name2">{{this.profile.customer_firstname}} {{this.profile.customer_lastname}}  <a href="/eprofile/" class="button edit-btn"><img src="img/gear.png" /></a></div>
+		
+		<div class="row margin-vertical-half no-gap" style="background:#000; padding:calc(15pt / var(--ratio)) calc(30pt / var(--ratio))">
+			<div class="col">
+				<div class="blabel">MOBILE</div>
+				<div class="bvalue">{{this.profile.customer_telephone}}</div>
+			</div>
+			<div class="col" style="border-left:calc(2pt / var(--ratio)) solid #D7D7E2">
+				<div class="blabel">EMAIL</div>
+				<div class="bvalue">{{this.profile.customer_email}}</div>
+			</div>
+		</div>
+		
+		
+		<div class="block no-padding">
+			<button class="button button-fill custom-btn" @click="logout" style="width:calc(170pt / var(--ratio)); margin:0 auto">LOG OUT</button>
+		</div>
+		
+	</div>
+	
+</div>
+
+
+</template>
+
+
+<style>
+.profile-pic2 {
+	border-radius:50%;
+	width:calc(180pt / var(--ratio));
+	height:calc(180pt / var(--ratio));
+	box-shadow:0 0 0 calc(6pt / var(--ratio)) #000;
+	background-size:cover;
+	background-repeat:no-repeat;
+	background-position:center;
+	margin:0 auto;
+}
+.profile-name2 {
+	font-family:'Roboto'; 
+	font-size:calc(26pt / var(--ratio));
+	font-weight:500;
+	color:#000;
+	margin:calc(10pt / var(--ratio)) auto 0;
+	text-align:center;
+	position:relative;
+	width:calc(250pt / var(--ratio));
+}
+
+.blabel {
+	font-size:calc(16pt / var(--ratio));
+	color:#fff;
+	text-align:left;
+	padding-top:calc(15pt / var(--ratio));
+	padding-left:calc(20pt / var(--ratio));
+	padding-right:calc(20pt / var(--ratio));
+	letter-spacing:calc(2pt / var(--ratio));
+}
+.bvalue {
+	font-size:calc(20pt / var(--ratio));
+	color:#fff;
+	text-align:left;
+	padding-bottom:calc(15pt / var(--ratio));
+	padding-left:calc(20pt / var(--ratio));
+	padding-right:calc(20pt / var(--ratio));
+}
+
+.edit-btn {
+	box-shadow:0 1px 5pt 2px rgba(0,0,0,0.15);
+	width:calc(74pt / var(--ratio));
+	height:calc(74pt / var(--ratio));
+	border-radius:calc(15pt / var(--ratio));
+	position:absolute;
+	bottom:0;
+	left:100%;
+}
+.edit-btn>img {
+	padding-top:calc(17pt / var(--ratio));
+	height:calc(40pt / var(--ratio));
+}
+</style>
+
+
+<script>
+  return {
+		data() {
+			profile = this;
+			return {
+				'profile': user.profile
+			};
+		},
+    methods: {
+			
+			viewDetails: function() {
+			
+			},
+			
+			logout: function() {
+				
+				actions.log_out(function() {
+					window.location.reload();
+				});
+				
+			}
+			
+    },
+		on: {
+      pageInit: function () {
+			
+				
+			}
+		}
+	};
+
+</script>
+

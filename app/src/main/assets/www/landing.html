@@ -1,0 +1,56 @@
+<template>
+	<div class="page no-toolbar no-navbar no-swipeback" data-name="landing">
+		<div class="page-content pre-screen">
+			<img class="landing-logo" src="img/logo3.png" />
+			<div class="landing-word">
+			Welcome to<br>Jobstick
+			</div>
+			<div style="margin:0 calc(0px - 12px / var(--ratio))">
+				<a href="/login/"><button class="button button-fill custom-btn dark-bg">Log In</button></a>
+				<div style="margin-top:calc(37px / var(--ratio))"></div>
+				<a href="/signup/"><button class="button button-fill custom-btn gradient-bg">Sign Up</button></a>
+			</div>
+		</div>
+	</div>
+</template>
+
+<script>
+
+  return {
+    data() {
+		/*
+			return new Promise((resolve) => {
+				fetch(manager, {
+					method: 'POST',
+					body: JSON.stringify({
+						'action': 'content',
+						'data': {
+							'path': root.modules['account'].folder+'/'+root.modules['account'].language
+						}
+					})
+				}).then(res => res.json()).then(json => resolve({...json.login.en, ...root.application.en}))
+			});*/
+		},
+    methods: {
+      login: function (e) {
+				e.preventDefault();
+				app.input.validateInputs('#login-form');
+				if ($('#login-form .item-input-invalid').length) return;
+				
+				var params = {
+					
+				};
+				
+				router.navigate('/main/', { transition: 'f7-cover' });
+      },
+    },
+    on: {
+      pageInit: function () {
+			
+      },
+      pageAfterOut: function () {
+			
+      },
+    }
+  }
+</script>

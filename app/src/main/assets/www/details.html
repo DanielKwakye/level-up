@@ -1,0 +1,185 @@
+<template>
+<div class="page" data-name="details">
+
+	<div class="navbar no-shadow">
+		<div class="navbar-bg"></div>
+		<div class="navbar-inner">
+			<div class="left">
+				<a class="link icon-only" onclick="router.back()">
+					<img src="img/back.png" style="height:calc(32pt / var(--ratio))">
+				</a>
+			</div>
+			<div class="title"><img src="img/logo.png" /></div>
+			<div class="right">
+				
+			</div>
+		</div>
+	</div>
+	
+	<div class="page-content">
+
+		<div class="sub-title">BRAND</div>
+		<a class="brand"><img src="{{this.brand_image}}" /></a>
+		
+		<div class="text-align-center">
+			<img src="{{this.brand_logo}}" class="margin-top-half" style="height:calc(70pt / var(--ratio))" />
+			<div class="brand-desc">
+			{{this.brand_desc}}
+			</div>
+		</div>
+		
+		<div class="link-wrapper row no-gap text-align-center">
+			<a class="col link external" href="{{this.brand_website}}" target="_system"><img src="img/website.png" /></a>
+			<a class="col link external" href="{{this.brand_facebook}}" target="_system"><img src="img/facebook.png" /></a>
+			<a class="col link external" href="{{this.brand_instagram}}" target="_system"><img src="img/instagram.png" /></a>
+		</div>
+		
+		<div class="section-label">OUTLETS</div>
+		
+		<div class="list inset no-hairlines outlet-list margin-vertical-half">
+			<ul>
+				{{#each branches}}
+				<li>
+					<a href="#" @click="viewOutlet('{{this.brand_branch_id}}')" class="item-link">
+						<div class="item-content">
+							<div class="item-inner">
+								<div class="item-title-row">
+									<div class="item-title">{{this.brand_branch_name}}</div>
+								</div>
+							</div>
+						</div>
+					</a>
+				</li>
+				{{/each}}
+			</ul>
+		</div>
+		
+	</div>
+	
+</div>
+
+
+</template>
+
+
+<style>
+.brand {
+	margin:calc(10pt / var(--ratio)) 0;
+	padding:0 calc(10pt / var(--ratio));
+	display:block;
+}
+.brand>img {
+	width:100%;
+}
+.brand-desc {
+	font-family:'Roboto';
+	font-size:calc(16pt / var(--ratio));
+	font-weight:500;
+	color:#000;
+	max-width:calc(480pt / var(--ratio));
+	margin:calc(10pt / var(--ratio)) auto calc(30pt / var(--ratio));
+}
+.link-wrapper {
+	border-radius:calc(17pt / var(--ratio));
+	box-shadow:0 1px 5pt 2px rgba(0,0,0,0.15);
+	width:calc(280pt / var(--ratio));
+	margin:calc(60pt / var(--ratio)) auto calc(20pt / var(--ratio));
+}
+.link-wrapper img {
+	height:calc(28pt / var(--ratio));
+	margin:calc(20pt / var(--ratio)) 0;
+}
+.link-wrapper>.link:nth-last-of-type(2) {
+	border:2px solid #e7e7e2;
+	border-top:none;
+	border-bottom:none;
+}
+
+.section-label {
+	background:#1d1d1b;
+	color:#fff;
+	font-family:'Roboto';
+	font-size:calc(17pt / var(--ratio));
+	font-weight:500;
+	height:calc(65pt / var(--ratio));
+	line-height:calc(65pt / var(--ratio));
+	text-align:center;
+	letter-spacing:calc(4pt / var(--ratio));
+}
+.outlet-list {
+	--f7-list-item-min-height: calc(60pt / var(--ratio));
+}
+.outlet-list .item-inner {
+	padding-top:0;
+	padding-bottom:0;
+}
+.outlet-list .item-inner:before {
+	content:''!important;
+	background-image:url(img/right.png);
+	background-size:contain;
+	background-repeat:no-repeat;
+	background-position:center;
+	width:calc(18pt / var(--ratio))!important;
+	height:calc(22pt / var(--ratio))!important;
+}
+.outlet-list .item-inner:after {
+	height:calc(2pt / var(--ratio));
+	background-color:#3d4449;
+	transform:none;
+}
+
+</style>
+
+
+<script>
+  return {
+		data() {
+			details = this;
+			return details.getDetails();
+		},
+    methods: {
+			
+			getDetails: function(callback) {
+				var promises = [
+					details.getOutlets()
+				];
+				return Promise.allSettled(promises).then((results) => {
+					var combine = {};
+					results.forEach(function(result) { 
+						combine = {...combine, ...result.value} 
+					});
+					combine = {...combine, ...brand.selected_brand};
+					//app.ptr.done('#list-tab');
+					return combine;
+				});
+			},
+			
+			getOutlets: function() {
+				
+				return new Promise((resolve) => {
+					actions.get_brand_branches(brand.selected_brand.brand_id, function(json) {
+						var data = json.data;
+						resolve({ 'branches': data });
+					});
+				});
+				
+			},
+			
+			viewOutlet: function(id) {
+				
+				details.selected_outlet = details.branches.find(function(b){return b.brand_branch_id == id});
+				router.navigate('/outlet/');
+				
+			}
+			
+    },
+		on: {
+      pageInit: function () {
+			
+				
+			}
+		}
+	};
+
+</script>
+

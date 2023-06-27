@@ -1,0 +1,444 @@
+<template>
+<div class="page" data-name="list2">
+
+	<div class="navbar no-shadow">
+		<div class="navbar-bg white-bg"></div>
+		<div class="navbar-inner">
+			<div class="left">
+				<a class="link icon-only back">
+					<img src="img/back.png" style="width:calc(15pt / var(--ratio))">
+				</a>
+			</div>
+			<div class="title normal-title">{{#js_if 'this.type == "property"'}}Property{{else}}Self-Improvement{{/js_if}}</div>
+			<div class="right">
+				<a class="link icon-only" href="/filter/">
+					<img src="img/filter.png" style="width:calc(23pt / var(--ratio))">
+				</a>
+			</div>
+		</div>
+	</div>
+	
+	<div class="page-content sp-content">
+		
+		{{#js_if 'this.type == "property"'}}
+		<img class="custom-banner" src="img/property.png" />
+		<div class="toolbar tabbar tabbar-scrollable toolbar-top custom-tabbar" style="top:0">
+			<div class="toolbar-inner">
+				<a href="#tab-all" class="tab-link tab-link-active">All</a>
+				<a href="#tab-residential" class="tab-link tab-link-active">Residential</a>
+				<a href="#tab-commercial" class="tab-link tab-link-active">Commercial</a>
+				<a href="#tab-industrial" class="tab-link tab-link-active">Industrial</a>
+			</div>
+		</div>
+		{{else}}
+		<img class="custom-banner" src="img/self.png" />
+		<div class="toolbar tabbar tabbar-scrollable toolbar-top custom-tabbar" style="top:0">
+			<div class="toolbar-inner">
+				<a href="#tab-all" class="tab-link tab-link-active">All</a>
+				<a href="#tab-you" class="tab-link tab-link-active">For You</a>
+				<a href="#tab-soon" class="tab-link tab-link-active">Coming Soon</a>
+				<a href="#tab-others" class="tab-link tab-link-active">Others</a>
+			</div>
+		</div>
+		{{/js_if}}
+		
+		<div class="tabs-swipeable-wrap" style="height:calc(100% - var(--f7-toolbar-height))">
+			<div class="tabs">
+				{{#js_if 'this.type == "property"'}}
+				<div id="tab-all" class="tab tab-active">
+					<div class="tab-page">
+						<div class="flex-container">
+							<div class="title">All Properties</div>
+							<div class="seeall">See All</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<div class="property link" @click="navigate('/middle/')">
+									<div class="graphic">
+										<img src="img/sime.png" />
+									</div>
+									<div class="text">
+										<div class="pname">Sime Darby Property</div>
+										<div class="ptitle">RM5,000 Off</div>
+										<div class="ptype">Residential</div>
+									</div>
+								</div>
+							</div>
+							<div class="col">
+								<div class="property link">
+									<div class="graphic">
+										<img src="img/sample2.png" />
+									</div>
+									<div class="text">
+										<div class="pname">Sime Darby Property</div>
+										<div class="ptitle">RM5,000 Off</div>
+										<div class="ptype">Residential</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<div class="property link">
+									<div class="graphic">
+										<img src="img/sample2.png" />
+									</div>
+									<div class="text">
+										<div class="pname">Sime Darby Property</div>
+										<div class="ptitle">RM5,000 Off</div>
+										<div class="ptype">Residential</div>
+									</div>
+								</div>
+							</div>
+							<div class="col">
+								<div class="property link">
+									<div class="graphic">
+										<img src="img/sample2.png" />
+									</div>
+									<div class="text">
+										<div class="pname">Sime Darby Property</div>
+										<div class="ptitle">RM5,000 Off</div>
+										<div class="ptype">Residential</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="divider"></div>
+						
+						<div class="flex-container">
+							<div class="title">Residential</div>
+							<div class="seeall">See All</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<div class="property link">
+									<div class="graphic">
+										<img src="img/sime.png" />
+									</div>
+									<div class="text">
+										<div class="pname">Sime Darby Property</div>
+										<div class="ptitle">RM5,000 Off</div>
+										<div class="ptype">Residential</div>
+									</div>
+								</div>
+							</div>
+							<div class="col">
+								<div class="property link">
+									<div class="graphic">
+										<img src="img/sample2.png" />
+									</div>
+									<div class="text">
+										<div class="pname">Sime Darby Property</div>
+										<div class="ptitle">RM5,000 Off</div>
+										<div class="ptype">Residential</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<div class="property link">
+									<div class="graphic">
+										<img src="img/sample2.png" />
+									</div>
+									<div class="text">
+										<div class="pname">Sime Darby Property</div>
+										<div class="ptitle">RM5,000 Off</div>
+										<div class="ptype">Residential</div>
+									</div>
+								</div>
+							</div>
+							<div class="col">
+								<div class="property link">
+									<div class="graphic">
+										<img src="img/sample2.png" />
+									</div>
+									<div class="text">
+										<div class="pname">Sime Darby Property</div>
+										<div class="ptitle">RM5,000 Off</div>
+										<div class="ptype">Residential</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="extra-padding"></div>
+					</div>
+				</div>
+				<div id="tab-residential" class="tab">
+						
+				</div>
+				<div id="tab-commercial" class="tab">
+				
+				</div>
+				<div id="tab-industrial" class="tab">
+				
+				</div>
+				{{else}}
+				
+				<div id="tab-all" class="tab tab-active">
+					<div class="tab-page">
+						<div class="flex-container">
+							<div class="title">All Classes</div>
+							<div class="seeall">See All</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<div class="property link" @click="navigate('/middle2/')">
+									<div class="graphic">
+										<img src="img/s1.png" />
+									</div>
+									<div class="text">
+										<div class="pname">Success Resources</div>
+										<div class="ptitle">1,000pts only!</div>
+										<div class="ptype">Digital Marketing</div>
+									</div>
+								</div>
+							</div>
+							<div class="col">
+								<div class="property link">
+									<div class="graphic">
+										<img src="img/s2.png" />
+									</div>
+									<div class="text">
+										<div class="pname">Master Class</div>
+										<div class="ptitle">Buy 1 Free 1</div>
+										<div class="ptype">Cooking</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<div class="property link">
+									<div class="graphic">
+										<img src="img/sample2.png" />
+									</div>
+									<div class="text">
+										<div class="pname">Submit Asia</div>
+										<div class="ptitle">800pts only!</div>
+										<div class="ptype">Marketing</div>
+									</div>
+								</div>
+							</div>
+							<div class="col">
+								<div class="property link">
+									<div class="graphic">
+										<img src="img/sample2.png" />
+									</div>
+									<div class="text">
+										<div class="pname">Master Class</div>
+										<div class="ptitle">800pts only!</div>
+										<div class="ptype">UX/UI</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="divider"></div>
+						
+						<div class="flex-container">
+							<div class="title">For You</div>
+							<div class="seeall">See All</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<div class="property link">
+									<div class="graphic">
+										<img src="img/sample2.png" />
+									</div>
+									<div class="text">
+										<div class="pname">Submit Asia</div>
+										<div class="ptitle">800pts only!</div>
+										<div class="ptype">Marketing</div>
+									</div>
+								</div>
+							</div>
+							<div class="col">
+								<div class="property link">
+									<div class="graphic">
+										<img src="img/sample2.png" />
+									</div>
+									<div class="text">
+										<div class="pname">Master Class</div>
+										<div class="ptitle">800pts only!</div>
+										<div class="ptype">UX/UI</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="extra-padding"></div>
+					</div>
+				</div>
+				
+				<div id="tab-you" class="tab">
+						
+				</div>
+				<div id="tab-soon" class="tab">
+				
+				</div>
+				<div id="tab-others" class="tab">
+				
+				</div>
+				
+				{{/js_if}}
+			</div>
+		</div>
+	
+	</div>
+	
+</div>
+</template>
+
+<style>
+
+.custom-tabbar a.tab-link {
+	text-transform:unset!important;
+	color:rgb(65,64,66);
+	font-family:'Lato';
+	font-weight:500;
+	font-size:calc(20pt / var(--ratio));
+	line-height:calc(24pt / var(--ratio));
+	margin:0 calc(10pt / var(--ratio));
+	padding:0 calc(15pt / var(--ratio))!important;
+}
+.custom-tabbar a.tab-link:first-child {
+	margin-left:calc(30pt / var(--ratio));
+}
+.custom-tabbar a.tab-link.tab-link-active {
+	font-weight:700;
+}
+.custom-tabbar .tab-link-highlight {
+	background-color:rgb(65,64,66)!important;
+	border-radius:2pt;
+}
+.custom-tabbar.toolbar-top:before {
+	height:calc(1pt / var(--ratio));
+	background:rgb(230,231,232);
+	top:calc(100% - 2pt / var(--ratio));
+}
+.custom-banner {
+	width:100%;
+	max-width:100%;
+}
+.tab-page {
+	height:100%;
+	overflow:visible;
+	padding:calc(25pt / var(--ratio));
+}
+.flex-container {
+	display:flex;
+	width:100%;
+	margin-bottom:calc(10pt / var(--ratio));
+}
+.flex-container>* {
+	display:flex;
+	align-self:center;
+}
+.flex-container>div {
+	font-weight:700;
+	font-size:calc(20pt / var(--ratio));
+	font-family:'Lato';
+	color:#000;
+	padding:0 calc(20pt / var(--ratio));
+	flex-shrink:1;
+}
+.flex-container .seeall {
+	color:var(--f7-theme-color4);
+	text-decoration:underline;
+	flex-shrink:0;
+	margin-left:auto;
+}
+
+.property {
+	display:block;
+	border-radius:calc(26pt / var(--ratio));
+	box-shadow:2px 2px 5pt 0 rgba(0,0,0,0.15);
+	overflow:hidden;
+	margin-bottom:16px;
+	position:relative;
+}
+.property .graphic {
+	padding-top:85.6%;
+	position:relative;
+}
+.property .graphic>img {
+	width:100%;
+	height:100%;
+	top:0;
+	left:0;
+	object-fit:cover;
+	object-position:center;
+	position:absolute;
+}
+.property .text {
+	padding:calc(18pt / var(--ratio)) calc(26pt / var(--ratio)) calc(12pt / var(--ratio));
+	font-family:'Lato';
+	font-weight:500;
+	color:#000;
+}
+.property .ptitle {
+	font-weight:700;
+	font-size:calc(20pt / var(--ratio));
+	line-height:calc(24pt / var(--ratio));
+	min-height:calc(48pt / var(--ratio));
+}
+.property .pname {
+	font-size:calc(17pt / var(--ratio));
+	line-height:calc(21pt / var(--ratio));
+}
+.property .ptype {
+	font-size:calc(14pt / var(--ratio));
+	line-height:calc(16pt / var(--ratio));
+}
+.divider {
+	height:calc(2pt / var(--ratio));
+	background:rgb(230,231,232);
+	margin:calc(5pt / var(--ratio)) calc(0px - 26pt / var(--ratio)) calc(15pt / var(--ratio));
+	width:calc(100% + 52pt / var(--ratio));
+}
+.extra-padding {
+	position:relative;
+	height:calc(50pt / var(--ratio));
+}
+</style>
+
+<script>
+
+	return {
+		data() {
+			list = this;
+			return {
+				'type': dashboard.type
+			};
+			
+		},
+		methods: {
+		
+			navigate: function(url) {
+				router.navigate(url);
+			}
+		
+		},
+		on: {
+      pageInit: function () {
+				
+				var img = $('.sp-content .custom-banner')[0];
+				var h = 0;
+				img.onload = function () {
+					h = parseInt($(this).height())+6;
+				};
+			
+				$('.sp-content').on('scroll', function() {
+					$('.tab-page').css('overflow', $(this).scrollTop() < h ? 'visible':'auto');
+				});
+				
+				$('.custom-tabbar .tab-link-active').each(function(i) {
+					$(this).css('min-width', $(this).innerWidth()+'px');
+					if (i>0) $(this).removeClass('tab-link-active');
+				});
+			}
+		}
+	};
+
+</script>

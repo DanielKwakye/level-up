@@ -1,0 +1,210 @@
+<template>
+<div class="page" data-name="vip">
+
+	<div class="navbar">
+		<div class="navbar-bg white-bg"></div>
+		<div class="navbar-inner">
+			<div class="left">
+				<a class="link icon-only back">
+					<img src="img/back.png" style="width:calc(15pt / var(--ratio))">
+				</a>
+			</div>
+			<div class="title" style="line-height:1">
+				
+			</div>
+			<div class="right">
+				
+			</div>
+		</div>
+	</div>
+	
+	<div class="page-content">
+		
+		<img class="custom-banner" src="img/vip2.png" />
+		<div class="banner-text">
+			<div class="banner-title">
+				Upgrade to VIP<br>
+				and enjoy 10X Points<br>
+				into your Vwallet!
+			</div>
+			<div class="banner-desc" style="margin-top:calc(10pt / var(--ratio))">
+				How you and your friend can be benefit from these plan<br><br>
+				1. Lorem ipsum dolor sit amet, consectetuer adipiscing elit
+				<br><br>
+				2. sed diam nonummy nibh euismod tincidunt ut 
+				<br><br>
+				3. laoreet dolore magna aliquam erat volutpat. 
+			</div>
+		</div>
+		
+		<div class="accordion-item custom-accordion">
+			<div class="accordion-item-toggle">
+				<a href="#" class="item-link item-content">
+					<div class="item-inner">
+						<div class="banner-title">How it Works</div>
+					</div>
+				</a>
+			</div>
+			<div class="accordion-item-content">
+				<div class="list media-list no-hairlines no-hairlines-between">
+					<ul>
+						<li>
+							<div class="item-content">
+								<div class="item-media">
+									<img src="img/plain.png">
+								</div>
+								<div class="item-inner">
+									<div class="row">
+										<div class="col">
+											<div class="item-title-row">
+												<div class="item-title">Step 1</div>
+												<div class="item-after"></div>
+											</div>
+											<div class="item-text banner-desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="item-content">
+								<div class="item-media">
+									<img src="img/plain.png">
+								</div>
+								<div class="item-inner">
+									<div class="row">
+										<div class="col">
+											<div class="item-title-row">
+												<div class="item-title">Step 2</div>
+												<div class="item-after"></div>
+											</div>
+											<div class="item-text banner-desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="item-content">
+								<div class="item-media">
+									<img src="img/plain.png">
+								</div>
+								<div class="item-inner">
+									<div class="row">
+										<div class="col">
+											<div class="item-title-row">
+												<div class="item-title">Step 3</div>
+												<div class="item-after"></div>
+											</div>
+											<div class="item-text banner-desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+				
+				<div class="divider" style="margin:calc(15pt / var(--ratio)) 0"></div>
+				
+				<div class="banner-desc text-align-center">Have Questions? Visit Our <b><a>Help Centre</a></b></div>
+				
+			</div>
+		</div>
+	
+		<div class="extra-padding">
+			<div class="float-container">
+				<a class="custom-btn button button-fill" style="background:#26D8E1">Start Now</a>
+			</div>
+		</div>
+	
+	</div>
+	
+</div>
+</template>
+
+<style>
+
+.custom-banner {
+	width:100%;
+	max-width:100%;
+}
+.banner-text {
+	padding:calc(30pt / var(--ratio)) calc(40pt / var(--ratio));
+}
+.banner-title {
+	font-family:'Lato';
+	font-weight:700;
+	font-size:calc(35pt / var(--ratio));
+	line-height:calc（42pt / var(--ratio));
+	color:#231F20;
+	position:relative;
+}
+.banner-desc {
+	font-family:'Lato';
+	font-weight:500;
+	font-size:calc(20pt / var(--ratio))!important;
+	line-height:calc(24pt / var(--ratio))!important;
+	color:#000!important;
+}
+.custom-accordion {
+	padding:calc(40pt / var(--ratio));
+	border-top:calc(10pt / var(--ratio)) solid rgb(241,242,242);
+	border-bottom:calc(10pt / var(--ratio)) solid rgb(241,242,242);
+}
+.custom-accordion .banner-title:after {
+	content:'';
+	display:block;
+	position:absolute;
+	right:0;
+	top:50%;
+	width:calc(17pt / var(--ratio));
+	height:calc(9pt / var(--ratio));
+	background-image:url('img/dropdown.png');
+	background-size:contain;
+	background-position:center;
+	background-repeat:no-repeat;
+	transform:rotate(180deg);
+	transition:transform 0.25s ease;
+}
+.custom-accordion.accordion-item-opened .banner-title:after {
+	transform:rotate(0deg);
+} 
+.custom-accordion .item-after img {
+	width:calc(17pt / var(--ratio));
+}
+.custom-accordion .media-list {
+	margin-top:calc(25pt / var(--ratio));
+}
+.custom-accordion .item-media img {
+	width:calc(132pt / var(--ratio));
+}
+.custom-accordion .item-title {
+	font-family:'Lato';
+	font-weight:700;
+	font-size:calc(20pt / var(--ratio));
+	line-height:calc(24pt / var(--ratio));
+	color:#26D8E1;
+	padding-bottom:calc(10pt / var(--ratio));
+}
+.custom-accordion .row {
+	height:100%;
+	align-items:center;
+}
+.extra-padding {
+	position:relative;
+	height:calc(150pt / var(--ratio));
+}
+.extra-padding .float-container {
+	width:calc(100% - 80pt / var(--ratio));
+	padding:0 calc(40pt / var(--ratio));
+	position:fixed;
+	z-index:100;
+	bottom:calc(var(--f7-safe-area-bottom) + 75pt / var(--ratio));
+}
+.divider {
+	height:calc(4pt / var(--ratio));
+	background:#E6E7E8;
+}
+
+</style>

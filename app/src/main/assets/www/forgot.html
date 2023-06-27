@@ -1,0 +1,149 @@
+<template>
+	<div class="page no-toolbar no-navbar no-swipeback" data-name="login">
+		
+		<div class="navbar no-shadow">
+			<div class="navbar-bg"></div>
+			<div class="navbar-inner">
+				<div class="left">
+					<a class="link icon-only" onclick="router.back()">
+						<img src="img/back.png" style="height:calc(32pt / var(--ratio))">
+					</a>
+				</div>
+				<div class="title"><img src="img/logo.png" /></div>
+				<div class="right">
+					
+				</div>
+			</div>
+		</div>
+	
+		<div class="page-content" style="background:#fff">
+
+			<div class="table-layout">
+				<div class="table-cell text-align-center">
+
+					<form id="forgot-form" @submit="forgot">
+						
+						<div class="text-align-center" style="font-family:'LatoB'; font-size:calc(28pt / var(--ratio))">FORGOT YOUR PASSWORD?</div>
+						<div class="list no-hairlines-md text-align-left" style="margin-top:calc(100pt / var(--ratio))">
+							<ul>
+								<li class="item-content item-input">
+									<div class="item-inner first">
+										<div class="item-input-wrap">
+											<input id="forgot-id" type="email" placeholder="YOUR EMAIL" required validate>
+											<span class="input-clear-button"></span>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+						<div class="block no-padding">
+							<button class="button button-fill custom-btn" style="width:calc(170pt / var(--ratio)); margin:0 auto">SEND</button>
+						</div>
+					</form>
+				
+				</div>
+			</div>
+			
+		</div>
+	</div>
+
+</template>
+
+
+<style>
+#forgot-form {
+	padding:0 calc(40pt / var(--ratio));
+}
+#forgot-form .item-input-wrap:after {
+	display:none;
+}
+#forgot-form li.item-input {
+	border:1px solid #000;
+	min-height:calc(63pt / var(--ratio));
+	height:calc(63pt / var(--ratio));
+	line-height:calc(63pt / var(--ratio));
+	padding-bottom:0;
+	transition:height 0.25s ease-in-out;
+	position:relative;
+}
+#forgot-form li.item-input-invalid {
+	height:calc(90pt / var(--ratio))!important;
+}
+#forgot-form li.item-input .item-media {
+	align-self:center;
+	justify-content:center;
+	width:calc(60pt / var(--ratio));
+	min-width:0;
+	transform:translateX(calc(60pt / var(--ratio)));
+	margin-left:calc(0px - 75pt / var(--ratio));
+}
+#forgot-form li.item-input .item-inner {
+	padding-top:calc(5pt / var(--ratio));
+	padding-bottom:0;
+	min-height:0;
+}
+#forgot-form input {
+	font-family:'Lato';
+	font-size:calc(28pt / var(--ratio));
+	color:#000;
+}
+#forgot-form ::placeholder {
+	color:#000!important;
+	opacity:1;
+}
+#forgot-form .item-input-error-message {
+	margin-top:0;
+}
+#forgot-form li.item-input .item-inner:before {
+	position:absolute;
+	font-family:'Lato';
+	font-size:calc(20pt / var(--ratio));
+	color:#000;
+	top:calc(-90pt / var(--ratio));
+	left:-16px;
+	line-height:calc(25pt / var(--ratio));
+}
+#forgot-form li.item-input .item-inner.first:before {
+	content: "Don't worry! Just key in your email and we'll send you a link to reset your password.";
+	text-align:center;
+}
+</style>
+
+
+<script>
+
+  return {
+		data() {
+			return {};
+		},
+    methods: {
+			
+			forgot: function() {
+				window.event.preventDefault();
+				app.preloader.show();
+				var params = {
+					'data': {
+						'customer_email': $('#forgot-id').val()
+					}
+				};
+				actions.forget_password(params, function(json) {
+					toast(json.message);
+					$('#forgot-id').val('');
+					router.back();
+					app.preloader.hide();
+				}, function(json) {
+					app.dialog.alert(json.message);
+				});
+			}
+			
+    },
+		on: {
+      pageInit: function () {
+			
+				
+			}
+		}
+	};
+
+</script>
+

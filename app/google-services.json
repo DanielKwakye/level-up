@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "905601883071",
+    "project_id": "level-up-hub",
+    "storage_bucket": "level-up-hub.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:905601883071:android:3c9bcca1332da6827fdf0a",
+        "android_client_info": {
+          "package_name": "com.madbiz.seh"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "905601883071-3na4kbm9ibq4689lad6okgdp4jngck4q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxqsBbJFbeBJi4aVTlTGFfZCDO-uKz9IA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "905601883071-3na4kbm9ibq4689lad6okgdp4jngck4q.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "905601883071-j608l1g8c0577vsbqqicdg071juj6f17.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.streamempire.leveluphub"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

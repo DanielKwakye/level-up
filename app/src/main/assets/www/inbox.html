@@ -1,0 +1,159 @@
+<template>
+<div class="page" data-name="inbox">
+
+	<div class="navbar no-shadow">
+		<div class="navbar-bg"></div>
+		<div class="navbar-inner">
+			<div class="left">
+				<a class="link icon-only" onclick="router.back()">
+					<img src="img/back.png" style="height:calc(32pt / var(--ratio))">
+				</a>
+			</div>
+			<div class="title"><img src="img/logo.png" /></div>
+			<div class="right">
+				
+			</div>
+		</div>
+	</div>
+	
+	<div class="page-content">
+		<div class="sub-title">INBOX</div>
+		
+		<div class="list inset no-hairline-top inbox-list media-list margin-vertical-half">
+			<ul>
+				{{#each this.inbox}}
+				{{#if this.inbox_id}}
+				<li class="swipeout" data-id="{{this.inbox_id}}">
+					<div class="swipeout-content">
+						<a href="#" class="item-link item-content" @click="viewMessage('{{this.inbox_id}}'})">
+							<div class="item-media" style="align-self:center">
+								<img class="{{#js_if 'this.inbox_read == 1'}}grayscale{{/js_if}}" src="img/mail.png" style="height:calc(30pt / var(--ratio))" />
+							</div>
+							<div class="item-inner">
+								<div class="item-title-row">
+									<div class="item-title">{{this.inbox_name}}</div>
+								</div>
+								<div class="item-subtitle">{{this.inbox_subtitle}}</div>
+							</div>
+						</a>
+					</div>
+					<div class="swipeout-actions-right">
+						<a href="#" @click="removeMessage('{{this.inbox_id}}')" class="color-red custom-swipeout"><img src="img/trash.png" /> DELETE</a>
+					</div>
+				</li>
+				{{/if}}
+				{{/each}}
+			</ul>
+		</div>
+		
+	</div>
+	
+</div>
+</template>
+
+<style>
+.inbox-list {
+	--f7-list-item-min-height: calc(100pt / var(--ratio));
+}
+.inbox-list li {
+	border-radius:0px!important;
+}
+.inbox-list .item-inner {
+	padding-top:0;
+	padding-bottom:0;
+}
+.inbox-list .item-inner:before {
+	content:''!important;
+	background-image:url(img/right.png);
+	background-size:contain;
+	background-repeat:no-repeat;
+	background-position:center;
+	width:calc(18pt / var(--ratio))!important;
+	height:calc(22pt / var(--ratio))!important;
+	position:absolute;
+	top:calc(50% - 11pt / var(--ratio));
+	right:calc(10pt / var(--ratio));
+}
+.inbox-list .item-inner:after {
+	height:calc(2pt / var(--ratio));
+	background-color:#3d4449;
+	transform:none;
+	margin-left:calc(-100pt / var(--ratio));
+	width:calc(100% + 100pt / var(--ratio));
+}
+.inbox-list .item-title-row {
+	margin-top:calc(15pt / var(--ratio));
+}
+
+.custom-swipeout {
+	background-color:#CD0000!important;
+}
+.custom-swipeout img {
+	height:calc(35pt / var(--ratio));
+	margin-right:calc(6pt / var(--ratio));
+}
+img.grayscale {
+	filter:grayscale(100%);
+}
+</style>
+
+<script>
+  return {
+    data() {
+			inbox = this;
+			return inbox.getDetails();
+		},
+		
+		methods: {
+		
+			getDetails: function(callback) {
+				var promises = [
+					inbox.getInbox()
+				];
+				return Promise.allSettled(promises).then((results) => {
+					var combine = {};
+					results.forEach(function(result) { 
+						combine = {...combine, ...result.value} 
+					});
+					if (callback) callback(combine);
+					return combine;
+				});
+			},
+			
+			getInbox: function() {
+				
+				return new Promise((resolve) => {
+					actions.get_inbox(function(json) {
+						var data = json.data;
+						resolve({ 'inbox': data });
+					});
+				});
+				
+			},
+			
+			removeMessage: function(id) {
+			
+				app.dialog.confirm('Are you sure delete this message?', 'Confirmation', function() {
+					app.preloader.show();
+					var params = {
+						'data': {
+							'inbox_id': id
+						}
+					};
+					actions.remove_message(params, function(json) {
+						var data = json.data;
+						app.swipeout.delete('.swipeout[data-id="'+id+'"]');
+						app.preloader.hide();
+					});
+				});
+			},
+			
+			viewMessage: function(id) {
+				inbox.selected_id = id;
+				if (message && message.refresh) message.refresh();
+				router.navigate('/message/');
+			}
+			
+		}
+	};
+</script>

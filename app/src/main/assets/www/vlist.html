@@ -1,0 +1,276 @@
+<template>
+<div class="page" data-name="vlist">
+
+	<div class="navbar no-shadow">
+		<div class="navbar-bg"></div>
+		<div class="navbar-inner">
+			<div class="left">
+				<a class="link icon-only" onclick="router.back()">
+					<img src="img/back.png" style="height:calc(32pt / var(--ratio))">
+				</a>
+			</div>
+			<div class="title"><img src="img/logo.png" /></div>
+			<div class="right">
+				
+			</div>
+		</div>
+	</div>
+	
+	<div class="page-content">
+		<div class="sub-title">MY VOUCHER</div>
+		
+		<div class="toolbar toolbar voucher-toolbar" style="background-color:#000; width:100%; height:calc(75pt / var(--ratio))">
+			<div class="toolbar-inner" style="padding:0 calc(30pt / var(--ratio))">
+				<a class="button tab-link tab-link-active" href="#available-tab">AVAILABLE</a>
+				<a class="button tab-link" href="#used-tab">USED</a>
+				<a class="button tab-link" href="#expired-tab">EXPIRED</a>
+			</div>
+		</div>
+		
+		<form class="searchbar no-margin voucher elevation-0 voucher-sb">
+			<div class="searchbar-inner">
+				<div class="searchbar-input-wrap" style="height:calc(60pt / var(--ratio))">
+					<input type="search" placeholder="SEARCH">
+					<span class="input-clear-button"><span></span></span>
+				</div>
+			</div>
+		</form>
+		
+		<div class="tabs-swipeable-wrap" style="border-top:calc(1px / var(--ratio)) solid #D7D7E2">
+			<div class="tabs" id="voucher-tabs">
+				<div class="tab tab-active" id="available-tab">
+					{{#each this.vouchers.valid_vouchers}}
+					<div class="row no-gap voucher">
+						<div class="col-35">
+							<div style="background-image:url('{{this.brand_vouchers_image}}')"></div>
+						</div>
+						<div class="col-40">
+							<div class="clabel">NAME</div>
+							<div class="cvalue">{{this.brand_vouchers_name}}</div>
+							
+							<div class="clabel" style="margin-top:calc(30pt / var(--ratio))">EXPIRES</div>
+							<div class="cvalue2">{{this.customer_voucher_expiry_date}}</div>
+						</div>
+						<div class="col-25" style="align-self:flex-end">
+							<a class="use" @click="viewDetails('{{this.customer_voucher_id}}')">Use Now<img src="img/right.png" /></a>
+						</div>
+					</div>
+					{{else}}
+					<p class="no-item-label">- No valid voucher found -</p>
+					{{/each}}
+				</div>
+				<div class="tab" id="used-tab">
+					{{#each this.vouchers.redeemed_vouchers}}
+					<div class="row no-gap voucher">
+						<div class="col-35">
+							<div style="background-image:url('{{this.brand_vouchers_image}}')"></div>
+						</div>
+						<div class="col-40">
+							<div class="clabel">NAME</div>
+							<div class="cvalue">{{this.brand_vouchers_name}}</div>
+							
+							<div class="clabel" style="margin-top:calc(30pt / var(--ratio))">EXPIRES</div>
+							<div class="cvalue2">{{this.customer_voucher_expiry_date}}</div>
+						</div>
+						<div class="col-25" style="align-self:flex-end">
+							<a class="use" @click="viewDetails('{{this.customer_voucher_id}}')">Use Now<img src="img/right.png" /></a>
+						</div>
+					</div>
+					{{else}}
+					<p class="no-item-label">- No used voucher found -</p>
+					{{/each}}
+				</div>
+				<div class="tab" id="expired-tab">
+					{{#each this.vouchers.expired_vouchers}}
+					<div class="row no-gap voucher">
+						<div class="col-35">
+							<div style="background-image:url('{{this.brand_vouchers_image}}')"></div>
+						</div>
+						<div class="col-40">
+							<div class="clabel">NAME</div>
+							<div class="cvalue">{{this.brand_vouchers_name}}</div>
+							
+							<div class="clabel" style="margin-top:calc(30pt / var(--ratio))">EXPIRES</div>
+							<div class="cvalue2">{{this.customer_voucher_expiry_date}}</div>
+						</div>
+						<div class="col-25" style="align-self:flex-end">
+							<a class="use" @click="viewDetails('{{this.customer_voucher_id}}')">Use Now<img src="img/right.png" /></a>
+						</div>
+					</div>
+					{{else}}
+					<p class="no-item-label">- No expired voucher found -</p>
+					{{/each}}
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	
+</div>
+</template>
+
+<style>
+
+.voucher-toolbar .tab-link {
+	color:#686867;
+}
+.voucher-toolbar .tab-link-active {
+	color:#fff;
+}
+
+.searchbar {
+	
+}
+.searchbar-inner {
+	padding:calc(15pt / var(--ratio)) calc(30pt / var(--ratio));
+}
+.searchbar ::placeholder {
+	color:#000!important;
+	opacity:1!important;
+}
+.searchbar input {
+	padding-left:16px!important;
+	font-size:calc(25px / var(--ratio))!important;
+	font-family:'Lato'!important;
+	border:1px solid #000!important;
+	border-radius:0!important;
+}
+.searchbar input+.input-clear-button {
+	opacity:1!important;
+	visibility:unset!important;
+}
+.searchbar input+.input-clear-button:after {
+	content:'search_md'!important;
+	color:#000!important;
+	transform:translateX(-1px);
+}
+.searchbar input.input-with-value+.input-clear-button:after {
+	content:'delete_md'!important;
+	font-size:calc(40px / var(--ratio));
+	color:#000!important;
+}
+.searchbar input+.input-clear-button>span {
+	width:calc(72px / var(--ratio));
+	height:calc(72px / var(--ratio));
+	position:absolute;
+	display:block;
+	top:6px;
+	right:8px;
+}
+
+
+.voucher .clabel {
+	font-family:'Roboto';
+	font-size:calc(12pt / var(--ratio));
+	color:#000;
+	line-height:1.2;
+	margin-top:calc(10pt / var(--ratio));
+	letter-spacing:calc(2pt / var(--ratio));
+}
+.voucher .cvalue {
+	font-family:'Lato';
+	font-size:calc(20pt / var(--ratio));
+	color:#000;
+	margin-bottom:calc(5pt / var(--ratio));
+}
+.voucher .cvalue2 {
+	font-family:'Lato';
+	font-size:calc(15pt / var(--ratio));
+	color:#000;
+	margin-bottom:calc(5pt / var(--ratio));
+}
+.voucher {
+	padding:calc(30pt / var(--ratio)) 0;
+	background:#fff;
+	border-bottom:calc(1px / var(--ratio)) solid #D7D7E2;
+}
+.voucher .col-35>div {
+	width:calc(100% - 60pt / var(--ratio));
+	display:block;
+	margin:0 auto;
+	padding-top:calc(100% - 60pt / var(--ratio));
+	height:0;
+	border-radius:calc(10pt / var(--ratio));
+	box-shadow:0 1px 5pt 2px rgba(0,0,0,0.15);
+	background-size:contain;
+	background-position:center;
+	background-repeat:no-repeat;
+}
+.use {
+	font-family:'Lato';
+	font-size:calc(16pt / var(--ratio));
+	color:#000;
+	display:block;
+	margin-bottom:calc(8pt / var(--ratio));
+}
+.use>img {
+	margin-left:calc(15pt / var(--ratio));
+	height:calc(20pt / var(--ratio));
+	vertical-align:middle;
+}
+.no-item-label {
+	text-align:center;
+	padding:calc(15pt / var(--ratio));
+	font-family:'Lato';
+	font-size:calc(20pt / var(--ratio));
+}
+</style>
+
+<script>
+
+	return {
+		data() {
+			vlist = this;
+			return vlist.getDetails();
+		},
+		methods: {
+		
+			viewDetails: function(id) {
+				vlist.selected_voucher_id = id;
+				router.navigate('/vdetails/');
+			},
+			
+			getDetails: function(callback) {
+				var promises = [
+					vlist.getVouchers()
+				];
+				return Promise.allSettled(promises).then((results) => {
+					var combine = {};
+					results.forEach(function(result) { 
+						combine = {...combine, ...result.value} 
+					});
+					if (callback) callback(combine);
+					return combine;
+				});
+			},
+			
+			getVouchers: function() {
+				return new Promise((resolve) => {
+					actions.get_own_vouchers(function(json) {
+						var data = json.data;
+						resolve({ 'vouchers': data });
+					});
+				});
+			},
+		
+		},
+		on: {
+      pageInit: function () {
+				
+				var searchbar = app.searchbar.create({
+					el: 'form.searchbar.voucher-sb',
+					backdrop: false,
+					searchContainer: '#voucher-tabs',
+					searchItem: '.voucher',
+					searchIn: '.cvalue',
+					on: {
+						enable: function () {
+							console.log('Voucher Searchbar enabled')
+						}
+					}
+				});
+			}
+		}
+	};
+
+</script>

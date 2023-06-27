@@ -1,0 +1,77 @@
+<template>
+<div>
+
+	<div class="sub-title">BRAND</div>
+	{{#each brands}}
+	<a class="brand" @click="viewDetails('{{this.brand_id}}')"><img src="{{this.brand_image}}" /></a>
+	{{/each}}
+	
+</div>
+
+
+</template>
+
+
+<style>
+.brand {
+	margin:calc(10pt / var(--ratio)) 0;
+	padding:0 calc(10pt / var(--ratio));
+	display:block;
+}
+.brand>img {
+	width:100%;
+}
+</style>
+
+
+<script>
+  return {
+		data() {
+			brand = this;
+			return brand.refreshList();
+		},
+    methods: {
+			
+			refreshList: function(callback) {
+				var promises = [
+					brand.getBrands()
+				];
+				return Promise.allSettled(promises).then((results) => {
+					var combine = {};
+					results.forEach(function(result) { 
+						combine = {...combine, ...result.value} 
+					});
+					//app.ptr.done('#list-tab');
+					return combine;
+				});
+			},
+			
+			getBrands: function() {
+				
+				return new Promise((resolve) => {
+					actions.get_brand_all(function(json) {
+						var data = json.data;
+						resolve({ 'brands': data });
+					});
+				});
+				
+			},
+			
+			viewDetails: function(id) {
+				
+				brand.selected_brand = brand.brands.find(function(b){return b.brand_id == id});
+				router.navigate('/details/');
+				
+			}
+			
+    },
+		on: {
+      pageInit: function () {
+			
+				
+			}
+		}
+	};
+
+</script>
+
