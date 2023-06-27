@@ -118,10 +118,9 @@
 				
 				app.input.validateInputs('#login-form');
 				if ($('#login-form .item-input-invalid').length) return;
-				
+
 				app.preloader.show();
-				window.plugins.OneSignal.getIds(function(ids) {
-					localStorage.player_id = ids.userId;
+				// localStorage.player_id = ids.userId;
 					var params = {
 						'data': {
 							'login_submit': '1',
@@ -132,6 +131,7 @@
 						}
 					};
 					actions.log_in(params, function(json) {
+						app.preloader.hide();
 						localStorage.remember_me = $('#remember-pwd').is(':checked') ? '1' : '0';
 						$('#login-form')[0].reset();
 						checkLogged(1, function(st) {
@@ -139,11 +139,11 @@
 						});
 						//router.navigate('/main/');
 						toast(json.message);
-						
+
 					}, function(json) {
 						toast(json.message);
 					});
-				});
+				// window.plugins.OneSignal.getIds(function(ids) {});
 				
       },
 			
